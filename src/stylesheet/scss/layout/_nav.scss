@@ -1,0 +1,38 @@
+@import "./../base/variables";
+@import "./../base/mixins";
+.nav {
+  @include center();
+  &-list {
+    @include center();
+    gap: 96px;
+  }
+
+  &-item {
+    font-size: map-get($color, sm-4);
+    font-weight: map-get($font-weight, bold);
+    color: map-get($color, primary);
+  }
+
+  &-item > a {
+    display: relative;
+  }
+}
+#cart-quantity {
+  position: absolute;
+  display: inline-block;
+  background-color: red;
+  color: white;
+  font-size: 8px;
+  padding: 3px 4px;
+  border-radius: 12px;
+  top: 0;
+  left: 0;
+  transform: translate(-50%,-70%);
+  display: none;
+}
+
+@media only screen and (max-width: 576px) {
+  .nav {
+    display: none !important;
+  }
+}
