@@ -10,7 +10,7 @@ const Reason = () => {
         </h3>
         <ul className="service-list p-24 sm-p-reset sm-pt-16 row">
           <li className="service-item col col-3 col-sm-12">
-            <a className="link-free-ship" href="">
+            <a className="link-free-ship" href="@#">
               <span className="wrapper-ic wrapper-ic-white">
                 <i className="icon icon-shipping"></i>
               </span>
@@ -24,7 +24,7 @@ const Reason = () => {
             </a>
           </li>
           <li className="service-item col col-3 col-sm-12">
-            <a className="link-payment" href="">
+            <a className="link-payment" href="@#">
               <span className="wrapper-ic wrapper-ic-white">
                 <i className="icon icon-payment"></i>
               </span>
@@ -38,7 +38,7 @@ const Reason = () => {
             </a>
           </li>
           <li className="service-item col col-3 col-sm-12">
-            <a className="link-guarantee" href="">
+            <a className="link-guarantee" href="@#">
               <span className="wrapper-ic wrapper-ic-white">
                 <i className="icon icon-guarantee-b"></i>
               </span>
@@ -52,7 +52,7 @@ const Reason = () => {
             </a>
           </li>
           <li className="service-item col col-3 col-sm-12">
-            <a className="link-quality" href="">
+            <a className="link-quality" href="@#">
               <span className="wrapper-ic wrapper-ic-white">
                 <i className="icon icon-quality"></i>
               </span>

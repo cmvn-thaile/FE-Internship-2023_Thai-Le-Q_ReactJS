@@ -11,7 +11,7 @@ const Banner = () => {
             <br />
             collection
           </h2>
-          <a className="banner-button d-flex align-center justify-space-between">
+          <a className="banner-button d-flex align-center justify-space-between" href="@#">
             <span className="left-arrow-bg">
               <i className="icon icon-left-arrow"></i>
             </span>

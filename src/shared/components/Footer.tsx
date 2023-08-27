@@ -11,8 +11,8 @@ const Footer = () => {
   const iconList = [icFacebook, icTwitter, icLinkedin, icInstagram, icYoutube];
   const iconElement = iconList.map((icon, index) => {
     return (
-      <li className="social-item">
-        <a className="social-ic" href="">
+      <li key={index} className="social-item">
+        <a className="social-ic" href="@#">
           <img src={icon} alt={icon} />
         </a>
       </li>
@@ -41,7 +41,7 @@ const Footer = () => {
   const policyElement = policyList.map((policy, index) => {
     return (
       <li key={index} className="infor-shop-item">
-        <a className="info-item-link" href="">
+        <a className="info-item-link" href="@#">
           {policy}
         </a>
       </li>
@@ -51,7 +51,7 @@ const Footer = () => {
   const inforElement = inforList.map((infor, index) => {
     return (
       <li key={index} className="infor-shop-item">
-        <a className="info-item-link" href="">
+        <a className="info-item-link" href="@#">
           {infor}
         </a>
       </li>
@@ -73,7 +73,7 @@ const Footer = () => {
           <div className="footer-top row">
             <div className="shop-details-sums col col-5 col-sm-12">
               <h2 className="shop-details-logo">
-                <a className="logo-link" href="#">
+                <a className="logo-link" href="@#">
                   <img className="logo-img" src={logo} alt="E-Shop" />
                 </a>
               </h2>

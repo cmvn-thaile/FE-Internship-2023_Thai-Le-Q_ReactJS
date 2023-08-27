@@ -11,3 +11,12 @@ export interface Product {
   discount: number | null;
   status: productStatus;
 }
+
+export interface Cart {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+  discount: number | null;
+  quantity: number;
+}

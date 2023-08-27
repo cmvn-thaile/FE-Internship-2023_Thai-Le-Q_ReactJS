@@ -9,7 +9,7 @@ import ProductList from "./ProductList";
 const NewArrived = () => {
   const products: Product[] = [
     {
-      id: 1,
+      id: 5,
       name: "T-Shirt Summer Vibes",
       image: product1,
       price: 119.99,
@@ -17,7 +17,7 @@ const NewArrived = () => {
       status: productStatus.outOfStock,
     },
     {
-      id: 2,
+      id: 6,
       name: "Loose Knit 3/4 Sleeve",
       image: product2,
       price: 119.99,
@@ -25,7 +25,7 @@ const NewArrived = () => {
       status: productStatus.available,
     },
     {
-      id: 3,
+      id: 7,
       name: "Basic Slim Fit T-Shirt",
       image: product3,
       price: 99.9,
@@ -33,7 +33,7 @@ const NewArrived = () => {
       status: productStatus.available,
     },
     {
-      id: 4,
+      id: 8,
       name: "Loose Textured T-Shirt",
       image: product4,
       price: 11.99,

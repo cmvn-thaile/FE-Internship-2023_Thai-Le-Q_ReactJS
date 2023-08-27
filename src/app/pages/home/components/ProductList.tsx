@@ -9,7 +9,7 @@ const ProductList = ({ data }: ProductListProps) => {
   return (
     <ul className="product-list pt-12 sm-p-reset row">
       {data.map((product) => (
-        <ProductCard product={product} />
+        <ProductCard key={product.id} product={product} />
       ))}
     </ul>
   );
