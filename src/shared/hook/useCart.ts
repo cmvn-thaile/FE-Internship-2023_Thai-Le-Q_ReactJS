@@ -6,9 +6,10 @@ import {
   getFromLocalStorage,
 } from "../services/localStorageServices";
 
-
 export const useCart = () => {
   const [cartData, setCartData] = useState<Cart[]>([]);
+  const [cartQuantity, setCartQuantity] = useState<number>(0);
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
 
   useEffect(() => {
     const oldCartData = getFromLocalStorage(StorageKey.CartData);
@@ -33,11 +34,7 @@ export const useCart = () => {
       setCartData(cartData);
     }
 
-    // const totalQuantity = allCartData.reduce(
-    //   (total: any, item: any) => total + item.quantity,
-    //   0
-    // );
-    // saveToLocalStorage(StorageKey.CartQuantity, totalQuantity);
+    handleCartQuantity();
   };
 
   const getCartData = () => {
@@ -65,6 +62,7 @@ export const useCart = () => {
 
     saveToLocalStorage(StorageKey.CartData, updatedProducts);
     setCartData(updatedProducts);
+    handleCartQuantity();
   };
 
   const handleDeleteCart = (productId: number) => {
@@ -81,7 +79,28 @@ export const useCart = () => {
 
     saveToLocalStorage(StorageKey.CartData, updatedProducts);
     setCartData(updatedProducts);
+    handleCartQuantity();
   };
 
-  return { cartData, getCartData, addToCart, handleQuantity, handleDeleteCart };
+  const handleCartQuantity = () => {
+    const allCartData = getFromLocalStorage(StorageKey.CartData);
+    const totalQuantity = allCartData.reduce(
+      (total: any, item: any) => total + item.quantity,
+      0
+    );
+    saveToLocalStorage(StorageKey.CartQuantity, totalQuantity);
+    setCartQuantity(totalQuantity);
+    setIsUpdate(!isUpdate);
+  };
+
+  return {
+    cartData,
+    cartQuantity,
+    isUpdate,
+    getCartData,
+    addToCart,
+    handleQuantity,
+    handleDeleteCart,
+    handleCartQuantity,
+  };
 };

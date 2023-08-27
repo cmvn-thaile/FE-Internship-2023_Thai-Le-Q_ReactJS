@@ -9,7 +9,7 @@ export function saveToLocalStorage(key: StorageKey, data: any) {
 
 export function getFromLocalStorage(key: StorageKey): any {
   const data = localStorage.getItem(key);
-  console.log("Retrieved data from local storage:", data);
+  // console.log("Retrieved data from local storage:", data);
   try {
     return data ? JSON.parse(data) : null;
   } catch (error) {

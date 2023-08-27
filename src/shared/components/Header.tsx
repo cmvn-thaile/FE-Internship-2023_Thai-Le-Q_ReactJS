@@ -1,19 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 import logo from "../../assets/img/logo.png";
-import CartIcon from "../../app/pages/cart/components/CartIcon";
 
+import { useCart } from "../hook/useCart";
 
 const Header = () => {
   const location = useLocation();
   const { pathname } = location;
-
-
-
   const [isCardHeader, setIsCardHeader] = React.useState(false);
+
+  const { cartQuantity, isUpdate } = useCart();
+  const [headerCartQuantity, setHeaderCartQuantity] = useState(cartQuantity);
+
+  useEffect(() => {
+    setHeaderCartQuantity(cartQuantity);
+  }, [cartQuantity, isUpdate]);
 
   React.useEffect(() => {
     if (pathname === "/cart") {
@@ -72,10 +75,8 @@ const Header = () => {
               </li>
               <li className="header-icons-item">
                 <Link className="link-cart" to={`/cart`}>
-                    {/* <span id="cart-quantity"></span>
-
-                  <i className="icon icon-cart"></i> */}
-                  <CartIcon />
+                  <span id="cart-quantity">{headerCartQuantity}</span>
+                  <i className="icon icon-cart"></i>
                 </Link>
               </li>
               <li className="header-icons-item">
