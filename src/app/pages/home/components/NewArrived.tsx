@@ -21,7 +21,7 @@ const NewArrived = () => {
       name: "Loose Knit 3/4 Sleeve",
       image: product2,
       price: 119.99,
-      discount: null,
+      discount: 25,
       status: productStatus.available,
     },
     {

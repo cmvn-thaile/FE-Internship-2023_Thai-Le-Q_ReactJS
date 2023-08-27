@@ -252,6 +252,13 @@ footer {
   font-size: 20px;
   font-weight: 400;
 }
+.product-price-old {
+  text-decoration: line-through;
+  color: #ff0000;
+}
+.product-price-new {
+  color: #000;
+}
 .product-name {
   font-size: 16px;
   font-weight: 300;
@@ -1061,9 +1068,12 @@ li:nth-of-type(3) .category {
 .cart-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 20px;
+  font-weight: 400;
 }
 .cart-table .cart-table-header > th {
   color: #fff;
+  padding: 6px 10px;
 }
 .cart-table > thead {
   background-color: #fbb03b;
@@ -1079,10 +1089,11 @@ li:nth-of-type(3) .category {
 .cart-table .cart-product-row > td > button {
   padding: 5px 10px;
   border: 1px solid #fbb03b;
-  border-radius: 5px;
+  border-radius: 32px;
   background-color: #fbb03b;
   color: #fff;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 .cart-table .cart-product-row > td > button:hover {
   background-color: #fff;
@@ -1100,12 +1111,14 @@ li:nth-of-type(3) .category {
   justify-content: center;
   align-items: center;
   height: 120px;
+  max-width: 150px;
 }
 .cart-table-quantity-group > p {
   margin: 0 10px;
 }
 .cart-table-quantity-group > button {
-  padding: 2px 6px !important;
+  padding: 2px 6px;
+  border-radius: 50px;
 }
 
 .total-group {
@@ -1120,6 +1133,11 @@ li:nth-of-type(3) .category {
 }
 .total-group > p {
   padding: 0 10px;
+}
+
+.cart-table-price-group {
+  display: flex;
+  flex-direction: column;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -9,6 +9,15 @@
   &-price {
     font-size: map-get($font-size, md-1);
     font-weight: map-get($font-weight, normal);
+
+    &-old {
+      text-decoration: line-through;
+      color: map-get($color, red);
+    }
+
+    &-new {
+      color: map-get($color, black);
+    }
   }
 
   &-name {

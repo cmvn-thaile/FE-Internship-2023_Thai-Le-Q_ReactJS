@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../../../../shared/services/useCart";
 import { Cart } from "../../../../shared/services/types";
+import { calDiscountPrice, calSubTotal } from "../../../../utils/caculation";
 
 const CartTable = () => {
   const { getCartData } = useCart();
@@ -43,8 +44,21 @@ const CartTable = () => {
                 alt={item.name}
               />
             </td>
-            <td>{item.price}</td>
-            <td>{item.quantity * item.price}</td>
+            <td>
+              {item.discount ? (
+                <div className="cart-table-price-group">
+                  <span className="product-price-old">{item.price}</span>
+                  <span className="product-price-new">
+                    {calDiscountPrice(item.price, item.discount)}
+                  </span>
+                </div>
+              ) : (
+                <div>
+                  <span className="product-price">{item.price}</span>
+                </div>
+              )}
+            </td>
+            <td>{calSubTotal(item.price, item.quantity, item.discount)}</td>
             <td>
               <button>Delete</button>
             </td>

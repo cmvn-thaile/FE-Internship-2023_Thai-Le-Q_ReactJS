@@ -21,7 +21,7 @@ const Recommend = () => {
       name: "Loose Knit 3/4 Sleeve",
       image: product2,
       price: 119.99,
-      discount: null,
+      discount: 10,
       status: productStatus.available,
     },
     {
@@ -29,7 +29,7 @@ const Recommend = () => {
       name: "Basic Slim Fit T-Shirt",
       image: product3,
       price: 99.9,
-      discount: null,
+      discount: 50,
       status: productStatus.available,
     },
     {
