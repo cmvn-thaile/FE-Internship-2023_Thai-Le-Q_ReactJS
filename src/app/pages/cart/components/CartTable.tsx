@@ -1,10 +1,10 @@
 import React from "react";
-import { useCart } from "../../../../shared/services/useCart";
+import { useCart } from "../../../../shared/hook/useCart";
 import { Cart } from "../../../../shared/services/types";
 import { calDiscountPrice, calSubTotal } from "../../../../utils/caculation";
 
 const CartTable = () => {
-  const { getCartData } = useCart();
+  const { getCartData, handleQuantity, handleDeleteCart } = useCart();
   const cartData = getCartData();
   return (
     <table className="cart-table">
@@ -26,6 +26,7 @@ const CartTable = () => {
               <button
                 id={`minus-btn-${item.id}`}
                 className="quantity-btn minus-btn"
+                onClick={() => handleQuantity(item.id, "minus")}
               >
                 -
               </button>
@@ -33,6 +34,7 @@ const CartTable = () => {
               <button
                 id={`plus-btn-${item.id}`}
                 className="quantity-btn plus-btn"
+                onClick={() => handleQuantity(item.id, "plus")}
               >
                 +
               </button>
@@ -60,7 +62,7 @@ const CartTable = () => {
             </td>
             <td>{calSubTotal(item.price, item.quantity, item.discount)}</td>
             <td>
-              <button>Delete</button>
+              <button onClick={() => handleDeleteCart(item.id)}>Delete</button>
             </td>
           </tr>
         ))}

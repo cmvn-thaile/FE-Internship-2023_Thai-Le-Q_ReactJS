@@ -1,5 +1,6 @@
 export enum StorageKey {
   CartData = "cartData",
+  CartQuantity = "cartQuantity",
 }
 
 export function saveToLocalStorage(key: StorageKey, data: any) {

@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
 import { Link } from "react-router-dom";
 
+
 import logo from "../../assets/img/logo.png";
+import CartIcon from "../../app/pages/cart/components/CartIcon";
+
 
 const Header = () => {
   const location = useLocation();
   const { pathname } = location;
+
+
 
   const [isCardHeader, setIsCardHeader] = React.useState(false);
 
   React.useEffect(() => {
     if (pathname === "/cart") {
       setIsCardHeader(true);
+    } else {
+      setIsCardHeader(false);
     }
   }, [pathname]);
   return (
@@ -66,8 +72,10 @@ const Header = () => {
               </li>
               <li className="header-icons-item">
                 <Link className="link-cart" to={`/cart`}>
-                  <span id="cart-quantity"></span>
-                  <i className="icon icon-cart"></i>
+                    {/* <span id="cart-quantity"></span>
+
+                  <i className="icon icon-cart"></i> */}
+                  <CartIcon />
                 </Link>
               </li>
               <li className="header-icons-item">

@@ -1,5 +1,6 @@
+import { calDiscountPrice } from "../../utils/caculation";
 import { Product, Cart } from "../services/types";
-import { useCart } from "../services/useCart";
+import { useCart } from "../hook/useCart";
 
 type ProductCardProps = {
   product: Product;
@@ -59,10 +60,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <div className="product-price-group d-flex justify-space-between">
           {product.discount ? (
             <p className="product-price text-danger">
-              {(
-                product.price -
-                (product.price * product.discount) / 100
-              ).toFixed(2)}
+              {calDiscountPrice(product.price, product.discount)}
             </p>
           ) : (
             ""

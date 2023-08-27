@@ -1140,4 +1140,15 @@ li:nth-of-type(3) .category {
   flex-direction: column;
 }
 
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 70vh;
+  font-size: 30px;
+  font-weight: 400;
+}
+
 /*# sourceMappingURL=style.css.map */

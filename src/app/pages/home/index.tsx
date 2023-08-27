@@ -5,7 +5,7 @@ import Recommend from "./components/Recommend";
 import Reason from "./components/Reason";
 import NewArrived from "./components/NewArrived";
 
-export const index = () => {
+export const Index = () => {
   return (
     <main>
       <Banner />
