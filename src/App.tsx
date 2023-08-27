@@ -1,14 +1,17 @@
 import React from "react";
-import Header from "./shared/components/Header";
-import { index as Home } from "./app/pages/home"; 
-import Footer from "./shared/components/Footer";
+import { Route, Routes } from "react-router-dom";
+
+import { index as Home } from "./app/pages/home";
+import { index as Cart } from "./app/pages/cart";
+import Layout from "./Layout,";
 function App() {
   return (
-    <>
-      <Header />
-      <Home />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+      </Route>
+    </Routes>
   );
 }
 

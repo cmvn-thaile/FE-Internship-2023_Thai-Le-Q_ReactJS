@@ -502,15 +502,6 @@ footer {
   display: none;
 }
 
-.header-cart {
-  position: relative;
-  background-color: #fbb03b;
-}
-
-.header-container-cart > nav > ul > li {
-  color: white;
-}
-
 @media only screen and (max-width: 576px) {
   .logo {
     max-width: 20px;
@@ -1122,4 +1113,4 @@ li:nth-of-type(3) .category {
   padding: 0 10px;
 }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=style.css--watch.map */

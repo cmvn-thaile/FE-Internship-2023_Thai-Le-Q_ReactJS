@@ -17,6 +17,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       quantity: 1,
     };
     addToCart(productToCart);
+    alert("Add to cart successfully!");
   };
 
   return (

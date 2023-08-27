@@ -33,6 +33,15 @@
   }
 }
 
+.header-cart {
+  position: relative;
+  background-color: map-get($color, primary);
+}
+
+.header-container-cart > nav > ul > li {
+  color: white;
+}
+
 @media only screen and (max-width: 576px) {
   .logo {
     max-width: 20px;

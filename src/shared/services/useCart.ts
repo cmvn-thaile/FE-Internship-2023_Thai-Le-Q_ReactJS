@@ -8,9 +8,11 @@ import {
 
 export const useCart = () => {
   const [cartData, setCartData] = useState<Cart[]>([]);
-  const [isUpdate, setIsUpdate] = useState(false);
+
 
   useEffect(() => {
+    const oldCartData = getFromLocalStorage(StorageKey.CartData);
+    if (oldCartData) return;
     saveToLocalStorage(StorageKey.CartData, cartData);
   }, [cartData]);
 
@@ -32,5 +34,9 @@ export const useCart = () => {
     }
   };
 
-  return { addToCart };
+  const getCartData = () => {
+    return getFromLocalStorage(StorageKey.CartData);
+  }
+
+  return { getCartData,addToCart };
 };

@@ -1,11 +1,32 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
+
+import { Link } from "react-router-dom";
+
 import logo from "../../assets/img/logo.png";
+
 const Header = () => {
+  const location = useLocation();
+  const { pathname } = location;
+
+  const [isCardHeader, setIsCardHeader] = React.useState(false);
+
+  React.useEffect(() => {
+    if (pathname === "/cart") {
+      setIsCardHeader(true);
+    }
+  }, [pathname]);
   return (
     <header>
-      <div className="header">
+      <div className={isCardHeader ? `header header-cart` : `header `}>
         <div className="container">
-          <div className="header-container">
+          <div
+            className={
+              isCardHeader
+                ? ` header-container header-container-cart`
+                : `header-container`
+            }
+          >
             <h1 className="logo">
               <a className="logo-lg" href="@#">
                 <img className="logo-img" src={logo} alt="E-Shop" />
@@ -26,12 +47,12 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link"href="@#">
+                  <a className="nav-link" href="@#">
                     Women
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link"href="@#">
+                  <a className="nav-link" href="@#">
                     Kids
                   </a>
                 </li>
@@ -44,10 +65,10 @@ const Header = () => {
                 </a>
               </li>
               <li className="header-icons-item">
-                <a className="link-cart" href="cart.html">
+                <Link className="link-cart" to={`/cart`}>
                   <span id="cart-quantity"></span>
                   <i className="icon icon-cart"></i>
-                </a>
+                </Link>
               </li>
               <li className="header-icons-item">
                 <a className="link-user" href="@#">
