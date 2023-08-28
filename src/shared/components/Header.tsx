@@ -6,17 +6,11 @@ import logo from "../../assets/img/logo.png";
 
 import { useCart } from "../hook/useCart";
 
-const Header = () => {
+const Header = ({ count }: any) => {
   const location = useLocation();
   const { pathname } = location;
   const [isCardHeader, setIsCardHeader] = React.useState(false);
 
-  const { cartQuantity, isUpdate } = useCart();
-  const [headerCartQuantity, setHeaderCartQuantity] = useState(cartQuantity);
-
-  useEffect(() => {
-    setHeaderCartQuantity(cartQuantity);
-  }, [cartQuantity, isUpdate]);
 
   React.useEffect(() => {
     if (pathname === "/cart") {
@@ -75,7 +69,7 @@ const Header = () => {
               </li>
               <li className="header-icons-item">
                 <Link className="link-cart" to={`/cart`}>
-                  <span id="cart-quantity">{headerCartQuantity}</span>
+                  <span id="cart-quantity">{count}</span>
                   <i className="icon icon-cart"></i>
                 </Link>
               </li>

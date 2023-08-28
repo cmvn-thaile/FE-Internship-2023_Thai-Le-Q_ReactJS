@@ -1,12 +1,16 @@
 import React from "react";
-import { Product, productStatus } from "../../../../shared/services/types";
+import { Cart, Product, productStatus } from "../../../../shared/services/types";
 import ProductList from "./ProductList";
 import product1 from "../../../../assets/img/product-1.png";
 import product2 from "../../../../assets/img/product-2.png";
 import product3 from "../../../../assets/img/product-3.png";
 import product4 from "../../../../assets/img/product-4.png";
 
-const Recommend = () => {
+interface RecommendProps {
+  setProductAddToCart: (product: Cart) => void;
+}
+
+const Recommend = ({ setProductAddToCart }: RecommendProps) => {
   const products: Product[] = [
     {
       id: 1,
@@ -52,7 +56,7 @@ const Recommend = () => {
           </a>
         </div>
 
-        <ProductList data={products} />
+        <ProductList data={products} setProductAddToCart={setProductAddToCart} />
       </div>
     </section>
   );

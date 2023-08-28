@@ -1,15 +1,21 @@
 import React from "react";
-import { Product } from "../../../../shared/services/types";
+import { Cart, Product } from "../../../../shared/services/types";
 import ProductCard from "../../../../shared/components/ProductCard";
 
-type ProductListProps = {
+interface ProductListProps {
   data: Product[];
-};
-const ProductList = ({ data }: ProductListProps) => {
+  setProductAddToCart: (product: Cart) => void;
+}
+
+const ProductList = ({ data, setProductAddToCart }: ProductListProps) => {
   return (
     <ul className="product-list pt-12 sm-p-reset row">
       {data.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          setProductAddToCart={setProductAddToCart}
+        />
       ))}
     </ul>
   );

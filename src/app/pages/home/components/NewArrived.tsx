@@ -3,10 +3,14 @@ import product1 from "../../../../assets/img/product-1.png";
 import product2 from "../../../../assets/img/product-2.png";
 import product3 from "../../../../assets/img/product-3.png";
 import product4 from "../../../../assets/img/product-4.png";
-import { Product, productStatus } from "../../../../shared/services/types";
+import { Cart, Product, productStatus } from "../../../../shared/services/types";
 import ProductList from "./ProductList";
 
-const NewArrived = () => {
+interface NewArrivedProps {
+  setProductAddToCart: (product: Cart) => void;
+}
+
+const NewArrived = ({ setProductAddToCart }: NewArrivedProps) => {
   const products: Product[] = [
     {
       id: 5,
@@ -47,10 +51,8 @@ const NewArrived = () => {
         <h3 className="section-title pb-24 sm-pb-16 product-sm-title">
           Product in today
         </h3>
-        <ProductList data={products} />
+        <ProductList data={products} setProductAddToCart={setProductAddToCart}/>
       </div>
-
-
     </section>
   );
 };

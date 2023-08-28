@@ -2,13 +2,24 @@ import { calDiscountPrice } from "../../utils/caculation";
 import { Product, Cart } from "../services/types";
 import { useCart } from "../hook/useCart";
 
-type ProductCardProps = {
+interface ProductListProps {
   product: Product;
-};
-const ProductCard = ({ product }: ProductCardProps) => {
-  const { addToCart } = useCart();
+  setProductAddToCart: (product: Cart) => void;
+}
 
-  const handleAddToCart = () => {
+const ProductCard = ({ product, setProductAddToCart }: ProductListProps) => {
+  // const handleAddToCart = (product: Cart) => {
+  //   const productToCart: Cart = {
+  //     id: product.id,
+  //     image: product.image,
+  //     discount: product.discount,
+  //     name: product.name,
+  //     price: product.price,
+  //     quantity: 1,
+  //   };
+  //   addToCart(productToCart);
+  //   alert("Add to cart successfully!");
+  const handleClick = () => {
     const productToCart: Cart = {
       id: product.id,
       image: product.image,
@@ -17,8 +28,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       price: product.price,
       quantity: 1,
     };
-    addToCart(productToCart);
-    alert("Add to cart successfully!");
+    setProductAddToCart(productToCart);
   };
 
   return (
@@ -50,7 +60,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           ) : (
             <button
               className={`btn ${product.id} btn-add-to-cart absolute`}
-              onClick={handleAddToCart}
+              onClick={handleClick}
             >
               Add to cart
             </button>
