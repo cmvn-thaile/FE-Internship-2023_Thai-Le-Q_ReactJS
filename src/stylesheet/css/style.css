@@ -646,20 +646,6 @@ footer {
   display: relative;
 }
 
-#cart-quantity {
-  position: absolute;
-  display: inline-block;
-  background-color: red;
-  color: white;
-  font-size: 8px;
-  padding: 3px 4px;
-  border-radius: 12px;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -70%);
-  display: none;
-}
-
 @media only screen and (max-width: 576px) {
   .nav {
     display: none !important;
@@ -1149,6 +1135,20 @@ li:nth-of-type(3) .category {
   height: 70vh;
   font-size: 30px;
   font-weight: 400;
+}
+
+.cart-quantity {
+  position: absolute;
+  display: inline-block !important;
+  background-color: red;
+  color: white;
+  font-size: 8px;
+  padding: 3px 4px;
+  border-radius: 12px;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -70%);
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */

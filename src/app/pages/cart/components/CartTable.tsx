@@ -1,15 +1,19 @@
-import React from "react";
-import { useCart } from "../../../../shared/hook/useCart";
-import { Cart } from "../../../../shared/services/types";
-import { calDiscountPrice, calSubTotal } from "../../../../utils/caculation";
+import React from 'react';
+import { useCart } from '../../../../shared/hook/useCart';
+import { Cart } from '../../../../shared/services/types';
+import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
 
-const CartTable = () => {
-  const { getCartData, handleQuantity, handleDeleteCart } = useCart();
-  const cartData = getCartData();
+interface Props {
+  cartData: Cart[];
+  deleteCartItem: (id: number) => void;
+  updateQuantity: (id: number, type: string) => void;
+}
+
+const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
   return (
-    <table className="cart-table">
+    <table className='cart-table'>
       <thead>
-        <tr className="cart-table-header">
+        <tr className='cart-table-header'>
           <th>Product Name</th>
           <th>Quantity</th>
           <th>Image</th>
@@ -20,49 +24,49 @@ const CartTable = () => {
       </thead>
       <tbody>
         {cartData.map((item: Cart) => (
-          <tr className="cart-product-row" key={item.id}>
+          <tr className='cart-product-row' key={item.id}>
             <td>{item.name}</td>
-            <td className="cart-table-quantity-group">
+            <td className='cart-table-quantity-group'>
               <button
                 id={`minus-btn-${item.id}`}
-                className="quantity-btn minus-btn"
-                onClick={() => handleQuantity(item.id, "minus")}
+                className='quantity-btn minus-btn'
+                onClick={() => updateQuantity(item.id, 'minus')}
               >
                 -
               </button>
               <p id={`quantity-${item.id}`}>{item.quantity}</p>
               <button
                 id={`plus-btn-${item.id}`}
-                className="quantity-btn plus-btn"
-                onClick={() => handleQuantity(item.id, "plus")}
+                className='quantity-btn plus-btn'
+                onClick={() => updateQuantity(item.id, 'plus')}
               >
                 +
               </button>
             </td>
             <td>
               <img
-                className="cart-table-img"
+                className='cart-table-img'
                 src={item.image}
                 alt={item.name}
               />
             </td>
             <td>
               {item.discount ? (
-                <div className="cart-table-price-group">
-                  <span className="product-price-old">{item.price}</span>
-                  <span className="product-price-new">
+                <div className='cart-table-price-group'>
+                  <span className='product-price-old'>{item.price}</span>
+                  <span className='product-price-new'>
                     {calDiscountPrice(item.price, item.discount)}
                   </span>
                 </div>
               ) : (
                 <div>
-                  <span className="product-price">{item.price}</span>
+                  <span className='product-price'>{item.price}</span>
                 </div>
               )}
             </td>
             <td>{calSubTotal(item.price, item.quantity, item.discount)}</td>
             <td>
-              <button onClick={() => handleDeleteCart(item.id)}>Delete</button>
+              <button onClick={() => deleteCartItem(item.id)}>Delete</button>
             </td>
           </tr>
         ))}
