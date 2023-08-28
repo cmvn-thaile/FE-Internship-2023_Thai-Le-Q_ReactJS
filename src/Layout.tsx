@@ -12,14 +12,18 @@ const Layout = () => {
 
   const handleAddToCart = (product: Cart) => {
     console.log("product", product);
-    if (product === null) return;
     addToCart(product);
     const count = JSON.parse(localStorage.getItem("cartQuantity") || "[]");
     setCount(count);
   };
 
   useEffect(() => {
-    handleAddToCart(productAddToCart);
+    if(productAddToCart !== null){
+      handleAddToCart(productAddToCart);
+    } else{
+      setCount(0)
+    }
+
   }, [productAddToCart]);
 
   return (

@@ -18,8 +18,11 @@ export const useCart = () => {
   }, [cartData]);
 
   const addToCart = (product: Cart) => {
+    console.log({product})
     const allCartData = getFromLocalStorage(StorageKey.CartData);
-    if (!allCartData) return;
+
+    if (!allCartData && allCartData.length !== 0) return;
+
     const existingProductIndex = allCartData.findIndex(
       (item: Cart) => item.id === product.id
     );
@@ -36,7 +39,6 @@ export const useCart = () => {
     }
 
     handleCartQuantity();
-
   };
 
   const getCartData = () => {
@@ -97,7 +99,6 @@ export const useCart = () => {
     setIsUpdate(!isUpdate);
   };
 
-
   return {
     cartData,
     cartQuantity,
@@ -107,6 +108,5 @@ export const useCart = () => {
     handleQuantity,
     handleDeleteCart,
     handleCartQuantity,
-
   };
 };
