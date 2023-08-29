@@ -6,11 +6,9 @@ import product2 from "../../../../assets/img/product-2.png";
 import product3 from "../../../../assets/img/product-3.png";
 import product4 from "../../../../assets/img/product-4.png";
 
-interface RecommendProps {
-  setProductAddToCart: (product: Cart) => void;
-}
 
-const Recommend = ({ setProductAddToCart }: RecommendProps) => {
+
+const Recommend = () => {
   const products: Product[] = [
     {
       id: 1,
@@ -56,7 +54,7 @@ const Recommend = ({ setProductAddToCart }: RecommendProps) => {
           </a>
         </div>
 
-        <ProductList data={products} setProductAddToCart={setProductAddToCart} />
+        <ProductList data={products}/>
       </div>
     </section>
   );

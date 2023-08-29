@@ -6,11 +6,7 @@ import product4 from "../../../../assets/img/product-4.png";
 import { Cart, Product, productStatus } from "../../../../shared/services/types";
 import ProductList from "./ProductList";
 
-interface NewArrivedProps {
-  setProductAddToCart: (product: Cart) => void;
-}
-
-const NewArrived = ({ setProductAddToCart }: NewArrivedProps) => {
+const NewArrived = () => {
   const products: Product[] = [
     {
       id: 5,
@@ -51,7 +47,7 @@ const NewArrived = ({ setProductAddToCart }: NewArrivedProps) => {
         <h3 className="section-title pb-24 sm-pb-16 product-sm-title">
           Product in today
         </h3>
-        <ProductList data={products} setProductAddToCart={setProductAddToCart}/>
+        <ProductList data={products} />
       </div>
     </section>
   );

@@ -4,17 +4,16 @@ import ProductCard from "../../../../shared/components/ProductCard";
 
 interface ProductListProps {
   data: Product[];
-  setProductAddToCart: (product: Cart) => void;
+
 }
 
-const ProductList = ({ data, setProductAddToCart }: ProductListProps) => {
+const ProductList = ({ data }: ProductListProps) => {
   return (
     <ul className="product-list pt-12 sm-p-reset row">
       {data.map((product) => (
         <ProductCard
           key={product.id}
           product={product}
-          setProductAddToCart={setProductAddToCart}
         />
       ))}
     </ul>

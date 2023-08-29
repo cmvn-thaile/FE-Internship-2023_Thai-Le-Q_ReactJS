@@ -1,25 +1,16 @@
-import { calDiscountPrice } from "../../utils/caculation";
-import { Product, Cart } from "../services/types";
-import { useCart } from "../hook/useCart";
+import { calDiscountPrice } from '../../utils/caculation';
+import { Product, Cart } from '../services/types';
+import { useCart } from '../hook/useCart';
 
 interface ProductListProps {
   product: Product;
-  setProductAddToCart: (product: Cart) => void;
 }
 
-const ProductCard = ({ product, setProductAddToCart }: ProductListProps) => {
-  // const handleAddToCart = (product: Cart) => {
-  //   const productToCart: Cart = {
-  //     id: product.id,
-  //     image: product.image,
-  //     discount: product.discount,
-  //     name: product.name,
-  //     price: product.price,
-  //     quantity: 1,
-  //   };
-  //   addToCart(productToCart);
-  //   alert("Add to cart successfully!");
-  const handleClick = () => {
+const ProductCard = ({ product }: ProductListProps) => {
+  const {cartData, addToCart, setCartData } = useCart();
+// move all this logic to useCart hook to the layout to make it work for all pages
+
+  const handleAddToCart = async (product: Product) => {
     const productToCart: Cart = {
       id: product.id,
       image: product.image,
@@ -28,9 +19,24 @@ const ProductCard = ({ product, setProductAddToCart }: ProductListProps) => {
       price: product.price,
       quantity: 1,
     };
-    setProductAddToCart(productToCart);
+    const updatedCartData = addToCart(productToCart);
+    if (updatedCartData) {
+      setCartData(updatedCartData);
+      alert('Add to cart successfully!');
+    }
   };
+  // const handleClick = () => {
+  //   const productToCart: Cart = {
+  //     id: product.id,
+  //     image: product.image,
+  //     discount: product.discount,
+  //     name: product.name,
+  //     price: product.price,
+  //     quantity: 1,
+  //   };
 
+  // };
+console.log(cartData)
   return (
     <li className="product-item col col-3 col-sm-6">
       <a className="product-link">
@@ -39,19 +45,19 @@ const ProductCard = ({ product, setProductAddToCart }: ProductListProps) => {
             -{product.discount}%
           </span>
         ) : (
-          ""
+          ''
         )}
         <div
           id={`product-${product.id}`}
           className="relative product-image-wrapper"
         >
           <img className="product-img" src={product.image} alt={product.name} />
-          {product.status === "outOfStock" ? (
+          {product.status === 'outOfStock' ? (
             <button
               className={`btn ${product.id} btn-add-to-cart absolute cart-btn-disabled`}
               onClick={() =>
                 alert(
-                  "This product is out of stock. Please try another product!"
+                  'This product is out of stock. Please try another product!'
                 )
               }
             >
@@ -60,7 +66,7 @@ const ProductCard = ({ product, setProductAddToCart }: ProductListProps) => {
           ) : (
             <button
               className={`btn ${product.id} btn-add-to-cart absolute`}
-              onClick={handleClick}
+              onClick={() => handleAddToCart(product)}
             >
               Add to cart
             </button>
@@ -73,7 +79,7 @@ const ProductCard = ({ product, setProductAddToCart }: ProductListProps) => {
               {calDiscountPrice(product.price, product.discount)}
             </p>
           ) : (
-            ""
+            ''
           )}
           <p className="product-price text-gray-2">{product.price}</p>
         </div>

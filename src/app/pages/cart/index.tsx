@@ -9,10 +9,14 @@ import {
 import { Cart } from '../../../shared/services/types';
 import { createId } from '../../../shared/services/createId';
 
-export const Index = () => {
-  const { getCartData, handleQuantity, handleDeleteCart } = useCart();
 
-  const [cartData, setCartData] = React.useState<Cart[]>(getCartData());
+
+
+export const Index = () => {
+  const { getCartData,cartData, handleQuantity, handleDeleteCart } = useCart();
+
+
+
   const [productId, setProductId] = React.useState<string>('');
 
   const updateQuantity = (id: number, type: string) => {
@@ -26,7 +30,7 @@ export const Index = () => {
   };
 
   React.useEffect(() => {
-    setCartData(getCartData());
+
   }, [productId]);
 
   return (

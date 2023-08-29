@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Product, Cart } from "../services/types";
+import React, { useEffect, useState } from 'react';
+import { Product, Cart } from '../services/types';
 import {
   StorageKey,
   saveToLocalStorage,
   getFromLocalStorage,
-} from "../services/localStorageServices";
+} from '../services/localStorageServices';
 
 export const useCart = () => {
-  const [cartData, setCartData] = useState<Cart[]>([]);
-  const [cartQuantity, setCartQuantity] = useState<number>(0);
+  const [cartData, setCartData] = useState<Cart[]>(
+    getFromLocalStorage(StorageKey.CartData)
+  );
+  
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
 
   useEffect(() => {
-    const oldCartData = getFromLocalStorage(StorageKey.CartData);
-    if (oldCartData) return;
     saveToLocalStorage(StorageKey.CartData, cartData);
+
   }, [cartData]);
 
   const addToCart = (product: Cart) => {
-    console.log({product})
+    console.log({ product });
     const allCartData = getFromLocalStorage(StorageKey.CartData);
 
-    if (!allCartData && allCartData.length !== 0) return;
+    if (!allCartData && allCartData.length ===0) return;
 
     const existingProductIndex = allCartData.findIndex(
       (item: Cart) => item.id === product.id
@@ -30,15 +31,19 @@ export const useCart = () => {
     if (existingProductIndex !== -1) {
       const updatedProducts = [...allCartData];
       updatedProducts[existingProductIndex].quantity += product.quantity;
-      saveToLocalStorage(StorageKey.CartData, updatedProducts);
-      setCartData(updatedProducts);
+      // saveToLocalStorage(StorageKey.CartData, updatedProducts);
+      // setCartData(updatedProducts);
+      // console.log('updated',updatedProducts)
+      return updatedProducts;
     } else {
       const cartData = [...allCartData, product];
-      saveToLocalStorage(StorageKey.CartData, cartData);
-      setCartData(cartData);
+      // saveToLocalStorage(StorageKey.CartData, cartData);
+      // setCartData(cartData);
+      return cartData;
+      // console.log('new',cartData)
     }
 
-    handleCartQuantity();
+    // handleCartQuantity();
   };
 
   const getCartData = () => {
@@ -57,9 +62,9 @@ export const useCart = () => {
     if (existingProductIndex === -1) return;
 
     const updatedProducts = [...allCartData];
-    if (type === "plus") {
+    if (type === 'plus') {
       updatedProducts[existingProductIndex].quantity += 1;
-    } else if (type === "minus") {
+    } else if (type === 'minus') {
       updatedProducts[existingProductIndex].quantity -= 1;
       if (updatedProducts[existingProductIndex].quantity < 1) {
         updatedProducts.splice(existingProductIndex, 1);
@@ -68,7 +73,7 @@ export const useCart = () => {
 
     saveToLocalStorage(StorageKey.CartData, updatedProducts);
     setCartData(updatedProducts);
-    handleCartQuantity();
+    // handleCartQuantity();
   };
 
   const handleDeleteCart = (productId: number) => {
@@ -85,28 +90,29 @@ export const useCart = () => {
 
     saveToLocalStorage(StorageKey.CartData, updatedProducts);
     setCartData(updatedProducts);
-    handleCartQuantity();
+    // handleCartQuantity();
   };
 
-  const handleCartQuantity = () => {
-    const allCartData = getFromLocalStorage(StorageKey.CartData);
-    const totalQuantity = allCartData.reduce(
-      (total: any, item: any) => total + item.quantity,
-      0
-    );
-    saveToLocalStorage(StorageKey.CartQuantity, totalQuantity);
-    setCartQuantity(totalQuantity);
-    setIsUpdate(!isUpdate);
-  };
+  // const handleCartQuantity = () => {
+  //   const allCartData = getFromLocalStorage(StorageKey.CartData);
+  //   const totalQuantity = allCartData.reduce(
+  //     (total: any, item: any) => total + item.quantity,
+  //     0
+  //   );
+  //   saveToLocalStorage(StorageKey.CartQuantity, totalQuantity);
+  //   setCartQuantity(totalQuantity);
+  //   setIsUpdate(!isUpdate);
+  // };
 
   return {
     cartData,
-    cartQuantity,
+    setCartData,
+    // cartQuantity,
+    // setCartQuantity,
     isUpdate,
     getCartData,
     addToCart,
     handleQuantity,
     handleDeleteCart,
-    handleCartQuantity,
   };
 };
