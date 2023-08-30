@@ -9,13 +9,8 @@ import {
 import { Cart } from '../../../shared/services/types';
 import { createId } from '../../../shared/services/createId';
 
-
-
-
 export const Index = () => {
-  const { getCartData,cartData, handleQuantity, handleDeleteCart } = useCart();
-
-
+  const { getCartData, cartData, handleQuantity, handleDeleteCart } = useCart();
 
   const [productId, setProductId] = React.useState<string>('');
 
@@ -29,12 +24,10 @@ export const Index = () => {
     setProductId(createId());
   };
 
-  React.useEffect(() => {
-
-  }, [productId]);
+  React.useEffect(() => {}, [productId]);
 
   return (
-    <div className='container'>
+    <div className="container">
       {cartData && cartData.length !== 0 ? (
         <>
           <h2> Shopping Cart</h2>

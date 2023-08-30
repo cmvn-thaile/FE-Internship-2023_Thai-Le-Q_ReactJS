@@ -15,12 +15,12 @@ const Header = () => {
   const { cartData } = useCart();
 
   const [count, setCount] = React.useState(0);
-console.log(cartData)
+  console.log(cartData);
   useEffect(() => {
-    if(!cartData && cartData===null) return;
+    if (!cartData && cartData === null) return;
     const count = calTotalQuantity(cartData);
     setCount(count);
-    console.log(count)
+    console.log(count);
   }, [cartData]);
 
   React.useEffect(() => {

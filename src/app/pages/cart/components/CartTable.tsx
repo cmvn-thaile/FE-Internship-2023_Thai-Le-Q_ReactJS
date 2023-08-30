@@ -11,9 +11,9 @@ interface Props {
 
 const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
   return (
-    <table className='cart-table'>
+    <table className="cart-table">
       <thead>
-        <tr className='cart-table-header'>
+        <tr className="cart-table-header">
           <th>Product Name</th>
           <th>Quantity</th>
           <th>Image</th>
@@ -24,12 +24,12 @@ const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
       </thead>
       <tbody>
         {cartData.map((item: Cart) => (
-          <tr className='cart-product-row' key={item.id}>
+          <tr className="cart-product-row" key={item.id}>
             <td>{item.name}</td>
-            <td className='cart-table-quantity-group'>
+            <td className="cart-table-quantity-group">
               <button
                 id={`minus-btn-${item.id}`}
-                className='quantity-btn minus-btn'
+                className="quantity-btn minus-btn"
                 onClick={() => updateQuantity(item.id, 'minus')}
               >
                 -
@@ -37,7 +37,7 @@ const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
               <p id={`quantity-${item.id}`}>{item.quantity}</p>
               <button
                 id={`plus-btn-${item.id}`}
-                className='quantity-btn plus-btn'
+                className="quantity-btn plus-btn"
                 onClick={() => updateQuantity(item.id, 'plus')}
               >
                 +
@@ -45,22 +45,22 @@ const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
             </td>
             <td>
               <img
-                className='cart-table-img'
+                className="cart-table-img"
                 src={item.image}
                 alt={item.name}
               />
             </td>
             <td>
               {item.discount ? (
-                <div className='cart-table-price-group'>
-                  <span className='product-price-old'>{item.price}</span>
-                  <span className='product-price-new'>
+                <div className="cart-table-price-group">
+                  <span className="product-price-old">{item.price}</span>
+                  <span className="product-price-new">
                     {calDiscountPrice(item.price, item.discount)}
                   </span>
                 </div>
               ) : (
                 <div>
-                  <span className='product-price'>{item.price}</span>
+                  <span className="product-price">{item.price}</span>
                 </div>
               )}
             </td>

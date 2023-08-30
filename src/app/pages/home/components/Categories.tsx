@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Categories = () => {
   return (
@@ -10,17 +10,23 @@ const Categories = () => {
               <h4 className="category-desc absolute">
                 New arrival sale now in!
               </h4>
-              <a className="btn btn-category absolute" href="@#"> SHOW COLLECTION </a>
+              <a className="btn btn-category absolute" href="@#">
+                {' '}
+                SHOW COLLECTION{' '}
+              </a>
             </div>
           </li>
           <li className="category-item col col-3 col-sm-6 relative">
             <div className="category relative">
               <h4 className="category-desc side-item-category absolute">
-                <a className="product-link"href="@#" >
+                <a className="product-link" href="@#">
                   Basic t-shirts $29,99
                 </a>
               </h4>
-              <a className="btn btn-category absolute" href="@#"> MORE DETAILS </a>
+              <a className="btn btn-category absolute" href="@#">
+                {' '}
+                MORE DETAILS{' '}
+              </a>
             </div>
           </li>
           <li className="category-item col col-3 col-sm-6 relative">

@@ -1,6 +1,6 @@
 export enum productStatus {
-  available = "available",
-  outOfStock = "outOfStock",
+  available = 'available',
+  outOfStock = 'outOfStock',
 }
 
 export interface Product {

@@ -1,10 +1,10 @@
-import React from "react";
-import logo from "../../assets/img/logo.png";
-import icFacebook from "../../assets/img/ic-facebook.svg";
-import icTwitter from "../../assets/img/ic-twitter.svg";
-import icLinkedin from "../../assets/img/ic-linkedin.svg";
-import icInstagram from "../../assets/img/ic-instagram.svg";
-import icYoutube from "../../assets/img/ic-youtube.svg";
+import React from 'react';
+import logo from '../../assets/img/logo.png';
+import icFacebook from '../../assets/img/ic-facebook.svg';
+import icTwitter from '../../assets/img/ic-twitter.svg';
+import icLinkedin from '../../assets/img/ic-linkedin.svg';
+import icInstagram from '../../assets/img/ic-instagram.svg';
+import icYoutube from '../../assets/img/ic-youtube.svg';
 
 const Footer = () => {
   //create icon list and icon element
@@ -21,22 +21,22 @@ const Footer = () => {
 
   //create list footer
   const policyList = [
-    "Order Status",
-    "Shipping and Delivery",
-    "Returns",
-    "Payment Options",
-    "Contact Us",
+    'Order Status',
+    'Shipping and Delivery',
+    'Returns',
+    'Payment Options',
+    'Contact Us',
   ];
 
   const inforList = [
-    "Gift Cards",
-    "Find a store",
-    "Newsletter",
-    "Become a member",
-    "Site feedback",
+    'Gift Cards',
+    'Find a store',
+    'Newsletter',
+    'Become a member',
+    'Site feedback',
   ];
 
-  const contactList = ["store@uikit.com", "Hotline: +1 131 138 138"];
+  const contactList = ['store@uikit.com', 'Hotline: +1 131 138 138'];
 
   const policyElement = policyList.map((policy, index) => {
     return (

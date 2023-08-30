@@ -7,8 +7,8 @@ interface ProductListProps {
 }
 
 const ProductCard = ({ product }: ProductListProps) => {
-  const {cartData, addToCart, setCartData } = useCart();
-// move all this logic to useCart hook to the layout to make it work for all pages
+  const { cartData, addToCart, setCartData } = useCart();
+  // move all this logic to useCart hook to the layout to make it work for all pages
 
   const handleAddToCart = async (product: Product) => {
     const productToCart: Cart = {
@@ -36,7 +36,7 @@ const ProductCard = ({ product }: ProductListProps) => {
   //   };
 
   // };
-console.log(cartData)
+  console.log(cartData);
   return (
     <li className="product-item col col-3 col-sm-6">
       <a className="product-link">
