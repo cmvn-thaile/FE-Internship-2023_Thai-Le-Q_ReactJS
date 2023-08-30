@@ -5,11 +5,11 @@ import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
 
 interface Props {
   cartData: Cart[];
-  deleteCartItem: (id: number) => void;
-  updateQuantity: (id: number, type: string) => void;
+  handleDeleteCart: (id: number) => void;
+  handleQuantity: (id: number, type: string) => void;
 }
 
-const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
+const CartTable = ({ cartData, handleDeleteCart, handleQuantity }: Props) => {
   return (
     <table className="cart-table">
       <thead>
@@ -30,7 +30,7 @@ const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
               <button
                 id={`minus-btn-${item.id}`}
                 className="quantity-btn minus-btn"
-                onClick={() => updateQuantity(item.id, 'minus')}
+                onClick={() => handleQuantity(item.id, 'minus')}
               >
                 -
               </button>
@@ -38,7 +38,7 @@ const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
               <button
                 id={`plus-btn-${item.id}`}
                 className="quantity-btn plus-btn"
-                onClick={() => updateQuantity(item.id, 'plus')}
+                onClick={() => handleQuantity(item.id, 'plus')}
               >
                 +
               </button>
@@ -66,7 +66,7 @@ const CartTable = ({ cartData, deleteCartItem, updateQuantity }: Props) => {
             </td>
             <td>{calSubTotal(item.price, item.quantity, item.discount)}</td>
             <td>
-              <button onClick={() => deleteCartItem(item.id)}>Delete</button>
+              <button onClick={() => handleDeleteCart(item.id)}>Delete</button>
             </td>
           </tr>
         ))}

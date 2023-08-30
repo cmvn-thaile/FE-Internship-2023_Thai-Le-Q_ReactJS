@@ -10,7 +10,13 @@ import {
 } from '../../../../shared/services/types';
 import ProductList from './ProductList';
 
-const NewArrived = () => {
+interface Props {
+  cartData: Cart[];
+  setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
+  addToCart: (item: Cart) => Cart[];
+}
+
+const NewArrived = ({ cartData, setCartData, addToCart }: Props) => {
   const products: Product[] = [
     {
       id: 5,
@@ -51,7 +57,12 @@ const NewArrived = () => {
         <h3 className="section-title pb-24 sm-pb-16 product-sm-title">
           Product in today
         </h3>
-        <ProductList data={products} />
+        <ProductList
+          data={products}
+          cartData={cartData}
+          setCartData={setCartData}
+          addToCart={addToCart}
+        />
       </div>
     </section>
   );

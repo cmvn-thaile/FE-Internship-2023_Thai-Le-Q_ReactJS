@@ -8,23 +8,23 @@ import {
 } from '../../../shared/services/localStorageServices';
 import { Cart } from '../../../shared/services/types';
 import { createId } from '../../../shared/services/createId';
+import { useOutletContext } from 'react-router-dom';
+
+interface Props {
+  cartData: Cart[];
+  handleQuantity: (id: number, type: string) => void;
+  handleDeleteCart: (id: number) => void;
+}
 
 export const Index = () => {
-  const { getCartData, cartData, handleQuantity, handleDeleteCart } = useCart();
+  const {
+    cartData,
 
-  const [productId, setProductId] = React.useState<string>('');
+    handleQuantity,
+    handleDeleteCart,
+  }: Props = useOutletContext();
 
-  const updateQuantity = (id: number, type: string) => {
-    handleQuantity(id, type);
-    setProductId(createId());
-  };
 
-  const deleteCartItem = (id: number) => {
-    handleDeleteCart(id);
-    setProductId(createId());
-  };
-
-  React.useEffect(() => {}, [productId]);
 
   return (
     <div className="container">
@@ -33,8 +33,9 @@ export const Index = () => {
           <h2> Shopping Cart</h2>
           <CartTable
             cartData={cartData}
-            deleteCartItem={deleteCartItem}
-            updateQuantity={updateQuantity}
+            handleDeleteCart={handleDeleteCart}
+            handleQuantity={handleQuantity}
+          
           />
         </>
       ) : (

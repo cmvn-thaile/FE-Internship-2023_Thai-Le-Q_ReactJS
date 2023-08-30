@@ -2,12 +2,21 @@ import { calDiscountPrice } from '../../utils/caculation';
 import { Product, Cart } from '../services/types';
 import { useCart } from '../hook/useCart';
 
-interface ProductListProps {
+interface ProductCardProps {
+  key: number;
   product: Product;
+  cartData: Cart[];
+  setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
+  addToCart: (item: Cart) => Cart[];
 }
 
-const ProductCard = ({ product }: ProductListProps) => {
-  const { cartData, addToCart, setCartData } = useCart();
+const ProductCard = ({
+  key,
+  product,
+  cartData,
+  setCartData,
+  addToCart,
+}: ProductCardProps) => {
   // move all this logic to useCart hook to the layout to make it work for all pages
 
   const handleAddToCart = async (product: Product) => {

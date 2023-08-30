@@ -6,13 +6,15 @@ import logo from '../../assets/img/logo.png';
 
 import { useCart } from '../hook/useCart';
 import { calTotalQuantity } from '../../utils/caculation';
+import { Cart } from '../services/types';
 
-const Header = () => {
+export interface HeaderProps {
+  cartData: Cart[];
+}
+const Header = ({ cartData }: HeaderProps) => {
   const location = useLocation();
   const { pathname } = location;
   const [isCardHeader, setIsCardHeader] = React.useState(false);
-
-  const { cartData } = useCart();
 
   const [count, setCount] = React.useState(0);
   console.log(cartData);
@@ -42,9 +44,9 @@ const Header = () => {
             }
           >
             <h1 className="logo">
-              <a className="logo-lg" href="@#">
+              <Link to="/" className="logo-lg" >
                 <img className="logo-img" src={logo} alt="E-Shop" />
-              </a>
+              </Link>
               <a className="logo-sm" href="index.html">
                 <img
                   className="logo-img"
