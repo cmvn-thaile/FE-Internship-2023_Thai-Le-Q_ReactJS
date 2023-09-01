@@ -20,11 +20,13 @@ const Header = () => {
   const [count, setCount] = React.useState(0);
 
   useEffect(() => {
+
     if (!cartData && cartData === null) return;
+    saveToLocalStorage(StorageKey.CartData, cartData);
     const count = calTotalQuantity(cartData);
     setCount(count);
     console.log(count);
-    saveToLocalStorage(StorageKey.CartData, cartData);
+
   }, [cartData]);
 
   React.useEffect(() => {

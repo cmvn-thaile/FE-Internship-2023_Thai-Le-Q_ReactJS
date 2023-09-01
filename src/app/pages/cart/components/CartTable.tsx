@@ -1,15 +1,30 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCartQuantity } from '../../../../redux/action';
 
 import { Cart } from '../../../../types';
 import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
 
-interface Props {
-  cartData: Cart[];
-  handleDeleteCart: (id: number) => void;
-  handleQuantity: (id: number, type: string) => void;
-}
 
-const CartTable = ({ cartData, handleDeleteCart, handleQuantity }: Props) => {
+const CartTable = () => {
+  const cartData = useSelector((state: { carts: Cart[] }) => state.carts);
+
+  const dispatch = useDispatch();
+
+  const handleQuantity = (id: number, quantity: number) => {
+    const action = updateCartQuantity(id, quantity);
+    if (action) {
+      dispatch(action);
+    }
+  };
+
+  const handleDeleteCart = (id: number) => {
+    const action = updateCartQuantity(id, 0);
+    if (action) {
+      dispatch(action);
+    }
+  }
+
   return (
     <table className="cart-table">
       <thead>
@@ -30,7 +45,7 @@ const CartTable = ({ cartData, handleDeleteCart, handleQuantity }: Props) => {
               <button
                 id={`minus-btn-${item.id}`}
                 className="quantity-btn minus-btn"
-                onClick={() => handleQuantity(item.id, 'minus')}
+                onClick={() => handleQuantity(item.id, item.quantity - 1)}
               >
                 -
               </button>
@@ -38,7 +53,7 @@ const CartTable = ({ cartData, handleDeleteCart, handleQuantity }: Props) => {
               <button
                 id={`plus-btn-${item.id}`}
                 className="quantity-btn plus-btn"
-                onClick={() => handleQuantity(item.id, 'plus')}
+                onClick={() => handleQuantity(item.id, item.quantity + 1)}
               >
                 +
               </button>

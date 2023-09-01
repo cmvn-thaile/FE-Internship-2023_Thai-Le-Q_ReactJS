@@ -1,5 +1,10 @@
 import { Cart } from '../types';
-import { ADD_NEW_PRODUCT, ADD_CONTAIN_PRODUCT } from './type';
+import {
+  ADD_NEW_CART,
+  ADD_CONTAIN_CART,
+  REMOVE_CART,
+  UPDATE_CART,
+} from './type';
 import {
   StorageKey,
   getFromLocalStorage,
@@ -20,13 +25,13 @@ const initialState: State = {
 
 export const cartReducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
-    case ADD_NEW_PRODUCT:
+    case ADD_NEW_CART:
       return {
         ...state,
         carts: [...state.carts, action.payload],
       };
 
-    case ADD_CONTAIN_PRODUCT:
+    case ADD_CONTAIN_CART:
       const updatedCarts = state.carts.map((item: Cart) => {
         if (item.id === action.payload.id) {
           return { ...item, quantity: item.quantity + 1 };
@@ -36,6 +41,26 @@ export const cartReducer = (state: State = initialState, action: Action) => {
       return {
         ...state,
         carts: updatedCarts,
+      };
+
+    case UPDATE_CART:
+      const updatedProducts = state.carts.map((item: Cart) => {
+        if (item.id === action.payload.id) {
+          return { ...item, quantity: action.payload.quantity };
+        }
+        return item;
+      });
+      return {
+        ...state,
+        carts: updatedProducts,
+      };
+
+    case REMOVE_CART:
+      return {
+        ...state,
+        carts: state.carts.filter(
+          (item: Cart) => item.id !== action.payload.id
+        ),
       };
 
     default:
