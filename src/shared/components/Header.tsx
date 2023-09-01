@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import logo from '../../assets/img/logo.png';
-
-import { useCart } from '../hook/useCart';
 import { calTotalQuantity } from '../../utils/caculation';
 import { Cart } from '../../types';
 
-export interface HeaderProps {
-  cartData: Cart[];
-}
-const Header = ({ cartData }: HeaderProps) => {
+import {
+  StorageKey,
+  saveToLocalStorage,
+} from '../services/localStorageServices';
+
+const Header = () => {
   const location = useLocation();
   const { pathname } = location;
   const [isCardHeader, setIsCardHeader] = React.useState(false);
-
+  const cartData = useSelector((state: { carts: Cart[] }) => state.carts);
   const [count, setCount] = React.useState(0);
-  console.log(cartData);
+
   useEffect(() => {
     if (!cartData && cartData === null) return;
     const count = calTotalQuantity(cartData);
     setCount(count);
     console.log(count);
+    saveToLocalStorage(StorageKey.CartData, cartData);
   }, [cartData]);
 
   React.useEffect(() => {
@@ -44,7 +46,7 @@ const Header = ({ cartData }: HeaderProps) => {
             }
           >
             <h1 className="logo">
-              <Link to="/" className="logo-lg" >
+              <Link to="/" className="logo-lg">
                 <img className="logo-img" src={logo} alt="E-Shop" />
               </Link>
               <a className="logo-sm" href="index.html">

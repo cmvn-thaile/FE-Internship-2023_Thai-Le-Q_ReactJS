@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Reason = () => {
   return (
     <section className="section section-reason">

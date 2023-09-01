@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from '../../../../shared/hook/useCart';
+
 import { Cart } from '../../../../types';
 import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
 

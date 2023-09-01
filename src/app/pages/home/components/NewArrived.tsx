@@ -1,10 +1,8 @@
-import React from 'react';
 import product1 from '../../../../assets/img/product-1.png';
 import product2 from '../../../../assets/img/product-2.png';
 import product3 from '../../../../assets/img/product-3.png';
 import product4 from '../../../../assets/img/product-4.png';
 import {
-  Cart,
   Product,
   productStatus,
 } from '../../../../types';

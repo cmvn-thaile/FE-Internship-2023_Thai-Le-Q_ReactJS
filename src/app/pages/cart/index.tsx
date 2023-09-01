@@ -1,13 +1,9 @@
-import React from 'react';
+
 import CartTable from './components/CartTable';
 import CartEmpty from './components/CartEmpty';
-import { useCart } from '../../../shared/hook/useCart';
-import {
-  StorageKey,
-  getFromLocalStorage,
-} from '../../../shared/services/localStorageServices';
+
 import { Cart } from '../../../types';
-import { createId } from '../../../shared/services/createId';
+
 import { useOutletContext } from 'react-router-dom';
 
 interface Props {

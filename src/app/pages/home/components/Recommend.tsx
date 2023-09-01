@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Cart,
   Product,
   productStatus,
 } from '../../../../types';

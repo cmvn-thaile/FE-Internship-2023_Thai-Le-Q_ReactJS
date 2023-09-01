@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Product, Cart } from '../../types';
+import { useEffect, useState } from 'react';
+import {  Cart } from '../../types';
 import {
   StorageKey,
   saveToLocalStorage,
@@ -10,19 +10,18 @@ export const useCart = () => {
   const [cartData, setCartData] = useState<Cart[]>(
     getFromLocalStorage(StorageKey.CartData)
   );
+
   
-  const [isUpdate, setIsUpdate] = useState<boolean>(false);
 
   useEffect(() => {
     saveToLocalStorage(StorageKey.CartData, cartData);
-
   }, [cartData]);
 
   const addToCart = (product: Cart) => {
     console.log({ product });
     const allCartData = getFromLocalStorage(StorageKey.CartData);
 
-    if (!allCartData && allCartData.length ===0) return;
+    if (!allCartData && allCartData.length === 0) return;
 
     const existingProductIndex = allCartData.findIndex(
       (item: Cart) => item.id === product.id
@@ -31,19 +30,12 @@ export const useCart = () => {
     if (existingProductIndex !== -1) {
       const updatedProducts = [...allCartData];
       updatedProducts[existingProductIndex].quantity += product.quantity;
-      // saveToLocalStorage(StorageKey.CartData, updatedProducts);
-      // setCartData(updatedProducts);
-      // console.log('updated',updatedProducts)
+
       return updatedProducts;
     } else {
       const cartData = [...allCartData, product];
-      // saveToLocalStorage(StorageKey.CartData, cartData);
-      // setCartData(cartData);
       return cartData;
-      // console.log('new',cartData)
     }
-
-    // handleCartQuantity();
   };
 
   const getCartData = () => {
@@ -73,7 +65,7 @@ export const useCart = () => {
 
     saveToLocalStorage(StorageKey.CartData, updatedProducts);
     setCartData(updatedProducts);
-    // handleCartQuantity();
+
   };
 
   const handleDeleteCart = (productId: number) => {
@@ -90,26 +82,13 @@ export const useCart = () => {
 
     saveToLocalStorage(StorageKey.CartData, updatedProducts);
     setCartData(updatedProducts);
-    // handleCartQuantity();
+
   };
 
-  // const handleCartQuantity = () => {
-  //   const allCartData = getFromLocalStorage(StorageKey.CartData);
-  //   const totalQuantity = allCartData.reduce(
-  //     (total: any, item: any) => total + item.quantity,
-  //     0
-  //   );
-  //   saveToLocalStorage(StorageKey.CartQuantity, totalQuantity);
-  //   setCartQuantity(totalQuantity);
-  //   setIsUpdate(!isUpdate);
-  // };
 
   return {
     cartData,
     setCartData,
-    // cartQuantity,
-    // setCartQuantity,
-    isUpdate,
     getCartData,
     addToCart,
     handleQuantity,
