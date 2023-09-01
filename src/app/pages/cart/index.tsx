@@ -6,7 +6,7 @@ import {
   StorageKey,
   getFromLocalStorage,
 } from '../../../shared/services/localStorageServices';
-import { Cart } from '../../../shared/services/types';
+import { Cart } from '../../../types';
 import { createId } from '../../../shared/services/createId';
 import { useOutletContext } from 'react-router-dom';
 

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './shared/components/Header';
 import Footer from './shared/components/Footer';
 import { useCart } from './shared/hook/useCart';
-import { Cart } from './shared/services/types';
+import { Cart } from './types';
 
 const Layout = () => {
   const { cartData, setCartData, addToCart, handleQuantity, handleDeleteCart } =
@@ -11,7 +11,7 @@ const Layout = () => {
   return (
     <>
       <Header cartData={cartData} />
-      <Outlet context={{cartData, setCartData, addToCart, handleQuantity, handleDeleteCart }}/>
+      <Outlet context={{ setCartData, handleQuantity, handleDeleteCart }}/>
       <Footer />
     </>
   );

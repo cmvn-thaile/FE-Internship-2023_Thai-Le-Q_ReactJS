@@ -1,24 +1,26 @@
 import { calDiscountPrice } from '../../utils/caculation';
-import { Product, Cart } from '../services/types';
+import { Product, Cart } from '../../types';
 import { useCart } from '../hook/useCart';
+import { addToCart } from '../../redux/action';
+import { useDispatch } from 'react-redux';
 
 interface ProductCardProps {
   key: number;
   product: Product;
-  cartData: Cart[];
-  setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
-  addToCart: (item: Cart) => Cart[];
+  // cartData: Cart[];
+  // setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
+  // addToCart: (item: Cart) => Cart[];
 }
 
 const ProductCard = ({
   key,
   product,
-  cartData,
-  setCartData,
-  addToCart,
-}: ProductCardProps) => {
+}: // cartData,
+// setCartData,
+// addToCart,
+ProductCardProps) => {
   // move all this logic to useCart hook to the layout to make it work for all pages
-
+  const dispatch = useDispatch();
   const handleAddToCart = async (product: Product) => {
     const productToCart: Cart = {
       id: product.id,
@@ -28,11 +30,13 @@ const ProductCard = ({
       price: product.price,
       quantity: 1,
     };
-    const updatedCartData = addToCart(productToCart);
-    if (updatedCartData) {
-      setCartData(updatedCartData);
+    const action = addToCart(productToCart);
+    if (action) {
+      dispatch(action);
       alert('Add to cart successfully!');
     }
+
+
   };
   // const handleClick = () => {
   //   const productToCart: Cart = {
@@ -45,7 +49,7 @@ const ProductCard = ({
   //   };
 
   // };
-  console.log(cartData);
+  // console.log(cartData);
   return (
     <li className="product-item col col-3 col-sm-6">
       <a className="product-link">

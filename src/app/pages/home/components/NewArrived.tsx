@@ -7,16 +7,16 @@ import {
   Cart,
   Product,
   productStatus,
-} from '../../../../shared/services/types';
+} from '../../../../types';
 import ProductList from './ProductList';
 
-interface Props {
-  cartData: Cart[];
-  setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
-  addToCart: (item: Cart) => Cart[];
-}
+// interface Props {
+//   cartData: Cart[];
+//   setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
+//   addToCart: (item: Cart) => Cart[];
+// }
 
-const NewArrived = ({ cartData, setCartData, addToCart }: Props) => {
+const NewArrived = () => {
   const products: Product[] = [
     {
       id: 5,
@@ -59,9 +59,9 @@ const NewArrived = ({ cartData, setCartData, addToCart }: Props) => {
         </h3>
         <ProductList
           data={products}
-          cartData={cartData}
-          setCartData={setCartData}
-          addToCart={addToCart}
+          // cartData={cartData}
+          // setCartData={setCartData}
+          // addToCart={addToCart}
         />
       </div>
     </section>

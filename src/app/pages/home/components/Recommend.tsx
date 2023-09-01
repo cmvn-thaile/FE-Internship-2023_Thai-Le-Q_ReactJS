@@ -3,20 +3,20 @@ import {
   Cart,
   Product,
   productStatus,
-} from '../../../../shared/services/types';
+} from '../../../../types';
 import ProductList from './ProductList';
 import product1 from '../../../../assets/img/product-1.png';
 import product2 from '../../../../assets/img/product-2.png';
 import product3 from '../../../../assets/img/product-3.png';
 import product4 from '../../../../assets/img/product-4.png';
 
-interface Props {
-  cartData: Cart[];
-  setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
-  addToCart: (item: Cart) => Cart[];
-}
+// interface Props {
+//   cartData: Cart[];
+//   setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
+//   addToCart: (item: Cart) => Cart[];
+// }
 
-const Recommend = ({ cartData, setCartData, addToCart }: Props) => {
+const Recommend = () => {
   const products: Product[] = [
     {
       id: 1,
@@ -64,9 +64,9 @@ const Recommend = ({ cartData, setCartData, addToCart }: Props) => {
 
         <ProductList
           data={products}
-          cartData={cartData}
-          setCartData={setCartData}
-          addToCart={addToCart}
+          // cartData={cartData}
+          // setCartData={setCartData}
+          // addToCart={addToCart}
         />
       </div>
     </section>

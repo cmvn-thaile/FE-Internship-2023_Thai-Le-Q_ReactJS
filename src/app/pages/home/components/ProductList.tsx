@@ -1,18 +1,18 @@
 import React from 'react';
-import { Cart, Product } from '../../../../shared/services/types';
+import { Cart, Product } from '../../../../types';
 import ProductCard from '../../../../shared/components/ProductCard';
 
 interface ProductListProps {
   data: Product[];
-  cartData: Cart[];
-  setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
-  addToCart: (item: Cart) => Cart[];
+  // cartData: Cart[];
+  // setCartData: React.Dispatch<React.SetStateAction<Cart[]>>;
+  // addToCart: (item: Cart) => Cart[];
 }
 const ProductList = ({
   data,
-  cartData,
-  setCartData,
-  addToCart,
+  // cartData,
+  // setCartData,
+  // addToCart,
 }: ProductListProps) => {
   return (
     <ul className="product-list pt-12 sm-p-reset row">
@@ -20,9 +20,9 @@ const ProductList = ({
         <ProductCard
           key={product.id}
           product={product}
-          cartData={cartData}
-          setCartData={setCartData}
-          addToCart={addToCart}
+          // cartData={cartData}
+          // setCartData={setCartData}
+          // addToCart={addToCart}
         />
       ))}
     </ul>

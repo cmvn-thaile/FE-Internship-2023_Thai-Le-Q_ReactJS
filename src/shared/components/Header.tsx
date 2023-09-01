@@ -6,7 +6,7 @@ import logo from '../../assets/img/logo.png';
 
 import { useCart } from '../hook/useCart';
 import { calTotalQuantity } from '../../utils/caculation';
-import { Cart } from '../services/types';
+import { Cart } from '../../types';
 
 export interface HeaderProps {
   cartData: Cart[];

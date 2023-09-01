@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Product, Cart } from '../services/types';
+import { Product, Cart } from '../../types';
 import {
   StorageKey,
   saveToLocalStorage,

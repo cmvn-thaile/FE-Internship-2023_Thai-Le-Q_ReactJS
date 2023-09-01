@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCart } from '../../../../shared/hook/useCart';
-import { Cart } from '../../../../shared/services/types';
+import { Cart } from '../../../../types';
 import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
 
 interface Props {

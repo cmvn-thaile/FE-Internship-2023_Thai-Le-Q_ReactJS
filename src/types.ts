@@ -19,4 +19,5 @@ export interface Cart {
   price: number;
   discount: number | null;
   quantity: number;
+
 }

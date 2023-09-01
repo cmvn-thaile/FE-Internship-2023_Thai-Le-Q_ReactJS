@@ -5,7 +5,7 @@ import Recommend from './components/Recommend';
 import Reason from './components/Reason';
 import NewArrived from './components/NewArrived';
 
-import { Cart } from '../../../shared/services/types';
+import { Cart } from '../../../types';
 import { useOutletContext } from 'react-router-dom';
 
 interface Props {
@@ -27,15 +27,15 @@ export const Index = () => {
       <Banner />
       <Categories />
       <Recommend
-        cartData={cartData}
-        setCartData={setCartData}
-        addToCart={addToCart}
+        // cartData={cartData}
+        // setCartData={setCartData}
+        // addToCart={addToCart}
       />
       <Reason />
       <NewArrived
-        cartData={cartData}
-        setCartData={setCartData}
-        addToCart={addToCart}
+        // cartData={cartData}
+        // setCartData={setCartData}
+        // addToCart={addToCart}
       />
     </main>
   );
