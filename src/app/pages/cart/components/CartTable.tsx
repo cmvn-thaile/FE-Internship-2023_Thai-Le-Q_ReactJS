@@ -1,9 +1,10 @@
-
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCartQuantity } from '../../../../redux/action';
+import { useRef, useState, useEffect } from 'react';
 
 import { Cart } from '../../../../types';
 import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
+
 
 const CartTable = () => {
   const cartData = useSelector(
@@ -25,6 +26,60 @@ const CartTable = () => {
       dispatch(action);
     }
   };
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState<number | null>(null);
+  const [quantity, setQuantity] = useState<number | undefined>();
+
+  const quantityInputRef = useRef<HTMLInputElement>(null);
+
+  const handleQuantityDoubleClick = (id: number) => {
+    setEditId(id);
+    setQuantity(cartData.find((cart: Cart) => cart.id === id)?.quantity || 0);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (editId && quantity !== undefined) {
+        const action = updateCartQuantity(editId, quantity);
+        if (action) {
+          dispatch(action);
+        }
+      }
+
+      setEditId(null);
+    }
+  };
+
+  const handleEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuantity = parseInt(event.target.value);
+    setQuantity(newQuantity);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        quantityInputRef.current &&
+        !quantityInputRef.current.contains(event.target as Node)
+      ) {
+        setEditId(null);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setEditId(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
 
   return (
     <table className="cart-table">
@@ -50,7 +105,20 @@ const CartTable = () => {
               >
                 -
               </button>
-              <p id={`quantity-${item.id}`}>{item.quantity}</p>
+              <td onDoubleClick={() => handleQuantityDoubleClick(item.id)}>
+                {item.id === editId ? (
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={handleEdit}
+                    onKeyDown={handleKeyDown}
+                    ref={quantityInputRef}
+                    autoFocus
+                  />
+                ) : (
+                  item.quantity
+                )}
+              </td>
               <button
                 id={`plus-btn-${item.id}`}
                 className="quantity-btn plus-btn"
