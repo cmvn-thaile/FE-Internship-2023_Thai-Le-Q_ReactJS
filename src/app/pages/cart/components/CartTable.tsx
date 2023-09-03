@@ -1,13 +1,14 @@
-import React from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCartQuantity } from '../../../../redux/action';
 
 import { Cart } from '../../../../types';
 import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
 
-
 const CartTable = () => {
-  const cartData = useSelector((state: { carts: Cart[] }) => state.carts);
+  const cartData = useSelector(
+    (state: { cart: { carts: Cart[] } }) => state.cart.carts
+  );
 
   const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ const CartTable = () => {
     if (action) {
       dispatch(action);
     }
-  }
+  };
 
   return (
     <table className="cart-table">
@@ -68,18 +69,18 @@ const CartTable = () => {
             <td>
               {item.discount ? (
                 <div className="cart-table-price-group">
-                  <span className="product-price-old">{item.price}</span>
+                  <span className="product-price-old">{item.price}$</span>
                   <span className="product-price-new">
-                    {calDiscountPrice(item.price, item.discount)}
+                    {calDiscountPrice(item.price, item.discount)}$
                   </span>
                 </div>
               ) : (
                 <div>
-                  <span className="product-price">{item.price}</span>
+                  <span className="product-price">{item.price}$</span>
                 </div>
               )}
             </td>
-            <td>{calSubTotal(item.price, item.quantity, item.discount)}</td>
+            <td>{calSubTotal(item.price, item.quantity, item.discount)}$</td>
             <td>
               <button onClick={() => handleDeleteCart(item.id)}>Delete</button>
             </td>

@@ -5,7 +5,9 @@ import CartEmpty from './components/CartEmpty';
 import { Cart } from '../../../types';
 
 export const Index = () => {
-  const cartData = useSelector((state: { carts: Cart[] }) => state.carts);
+  const cartData = useSelector(
+    (state: { cart: { carts: Cart[] } }) => state.cart.carts
+  );
 
   return (
     <div className="container">

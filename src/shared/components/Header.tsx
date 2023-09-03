@@ -11,22 +11,33 @@ import {
   StorageKey,
   saveToLocalStorage,
 } from '../services/localStorageServices';
+import { getProduct } from '../../redux/action';
+import { useAppDispatch } from '../../redux/store';
 
 const Header = () => {
   const location = useLocation();
   const { pathname } = location;
   const [isCardHeader, setIsCardHeader] = React.useState(false);
-  const cartData = useSelector((state: { carts: Cart[] }) => state.carts);
+  const cartData = useSelector(
+    (state: { cart: { carts: Cart[] } }) => state.cart.carts
+  );
   const [count, setCount] = React.useState(0);
 
-  useEffect(() => {
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    const action = getProduct();
+    if (action) {
+      dispatch(action);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
     if (!cartData && cartData === null) return;
     saveToLocalStorage(StorageKey.CartData, cartData);
     const count = calTotalQuantity(cartData);
     setCount(count);
     console.log(count);
-
   }, [cartData]);
 
   React.useEffect(() => {

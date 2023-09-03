@@ -30,7 +30,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <li className="product-item col col-3 col-sm-6">
-      <a className="product-link" href='/#'>
+      <a className="product-link">
         {product.discount ? (
           <span className="badge badge-danger product-discount absolute">
             -{product.discount}%
