@@ -1,0 +1,112 @@
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 20px;
+  font-weight: 400;
+
+  .cart-table-header > th {
+    color: map-get($color, white);
+    padding: 6px 10px;
+  }
+
+  & > thead {
+    background-color: map-get($color, primary);
+
+    height: 30px;
+  }
+
+  .cart-product-row {
+    border-bottom: 1px solid map-get($color, primary);
+    text-align: center;
+    & > td {
+      padding: 10px 20px;
+    }
+
+    & > td > button {
+      padding: 5px 10px;
+      border: 1px solid map-get($color, primary);
+      border-radius: 32px;
+      background-color: map-get($color, primary);
+      color: map-get($color, white);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        background-color: map-get($color, white);
+        color: map-get($color, primary);
+      }
+    }
+  }
+  & > td {
+    text-align: center;
+  }
+  &-img {
+    width: 75px;
+    height: 100px;
+  }
+
+  &-quantity-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    max-width: 150px;
+
+    & > p {
+      margin: 0 10px;
+    }
+
+    & > button {
+      padding: 2px 6px;
+
+      border-radius: 50px;
+    }
+  }
+}
+
+.total-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 0;
+
+  & > h3 {
+    padding: 0 10px;
+    color: map-get($color, primary);
+  }
+
+  & > p {
+    padding: 0 10px;
+  }
+}
+
+.cart-table-price-group{
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-empty{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:20px;
+  height: 70vh;
+  font-size: 30px;
+  font-weight: 400;
+
+}
+
+.cart-quantity {
+  position: absolute;
+  display: inline-block !important;
+  background-color: red;
+  color: white;
+  font-size: 8px;
+  padding: 3px 4px;
+  border-radius: 12px;
+  top: 0;
+  left: 0;
+  transform: translate(-50%,-70%);
+  display: none;
+}
