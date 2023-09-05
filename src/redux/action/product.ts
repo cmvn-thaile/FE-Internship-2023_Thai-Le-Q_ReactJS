@@ -33,7 +33,7 @@ export const getProduct =
   (): ThunkAction<Promise<void>, RootState, null, any> =>
   async (dispatch: any) => {
     await dispatch(pendingGetProduct());
-    const shouldThrowError = Math.floor(Math.random() * 2);
+    const shouldThrowError = Math.random() < 0.4;
     if (shouldThrowError) {
       return dispatch(getProductError("Can't load product! Something went wrong"));
     }
