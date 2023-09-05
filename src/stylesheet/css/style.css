@@ -558,7 +558,8 @@ footer {
 .footer-bottom {
   border-top: 2px solid #fff;
 }
-.footer .copyright {
+
+.copyright {
   text-align: center;
   padding: 20px 0;
   font-size: 14px;
@@ -1149,6 +1150,36 @@ li:nth-of-type(3) .category {
   left: 0;
   transform: translate(-50%, -70%);
   display: none;
+}
+
+.cart-table-quantity {
+  padding: 0px 10px;
+}
+
+.cart-table-quantity-input {
+  width: 50px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  outline: none;
+}
+
+.cart-table-total {
+  height: fit-content;
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 32px;
+}
+.cart-table-total .cart-table-total-text {
+  font-size: 20px;
+  font-weight: 400;
+  background-color: #fbb03b;
 }
 
 /*# sourceMappingURL=style.css.map */

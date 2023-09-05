@@ -5,7 +5,6 @@ import { useRef, useState, useEffect } from 'react';
 import { Cart } from '../../../../types';
 import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
 
-
 const CartTable = () => {
   const cartData = useSelector(
     (state: { cart: { carts: Cart[] } }) => state.cart.carts
@@ -27,7 +26,6 @@ const CartTable = () => {
     }
   };
 
-  const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
   const [quantity, setQuantity] = useState<number | undefined>();
 
@@ -81,81 +79,106 @@ const CartTable = () => {
     };
   }, []);
 
+  // const total = cartData.reduce((acc: any, item) => {
+  //   const subTotal = calSubTotal(item.price, item.quantity, item.discount);
+  //   return acc += subTotal;
+  // }, 0);
+  let total: number = 0;
+  cartData.forEach((item) => {
+    let subTotal = calSubTotal(item.price, item.quantity, item.discount);
+    total += parseFloat(subTotal);
+  });
+
   return (
-    <table className="cart-table">
-      <thead>
-        <tr className="cart-table-header">
-          <th>Product Name</th>
-          <th>Quantity</th>
-          <th>Image</th>
-          <th>Price</th>
-          <th>Sub Total</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {cartData.map((item: Cart) => (
-          <tr className="cart-product-row" key={item.id}>
-            <td>{item.name}</td>
-            <td className="cart-table-quantity-group">
-              <button
-                id={`minus-btn-${item.id}`}
-                className="quantity-btn minus-btn"
-                onClick={() => handleQuantity(item.id, item.quantity - 1)}
-              >
-                -
-              </button>
-              <td onDoubleClick={() => handleQuantityDoubleClick(item.id)}>
-                {item.id === editId ? (
-                  <input
-                    type="number"
-                    value={quantity}
-                    onChange={handleEdit}
-                    onKeyDown={handleKeyDown}
-                    ref={quantityInputRef}
-                    autoFocus
-                  />
+    <div className="d-flex">
+      <table className="cart-table col col-9">
+        <thead>
+          <tr className="cart-table-header">
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Sub Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartData.map((item: Cart) => (
+            <tr className="cart-product-row" key={item.id}>
+              <td>{item.name}</td>
+              <td className="cart-table-quantity-group">
+                <button
+                  id={`minus-btn-${item.id}`}
+                  className="quantity-btn minus-btn"
+                  onClick={() => handleQuantity(item.id, item.quantity - 1)}
+                >
+                  -
+                </button>
+                <td
+                  className="cart-table-quantity"
+                  onDoubleClick={() => handleQuantityDoubleClick(item.id)}
+                >
+                  {item.id === editId ? (
+                    <input
+                      type="number"
+                      className="cart-table-quantity-input"
+                      value={quantity}
+                      onChange={handleEdit}
+                      onKeyDown={handleKeyDown}
+                      ref={quantityInputRef}
+                      autoFocus
+                    />
+                  ) : (
+                    item.quantity
+                  )}
+                </td>
+                <button
+                  id={`plus-btn-${item.id}`}
+                  className="quantity-btn plus-btn"
+                  onClick={() => handleQuantity(item.id, item.quantity + 1)}
+                >
+                  +
+                </button>
+              </td>
+              <td>
+                <img
+                  className="cart-table-img"
+                  src={item.image}
+                  alt={item.name}
+                />
+              </td>
+              <td>
+                {item.discount ? (
+                  <div className="cart-table-price-group">
+                    <span className="product-price-old">{item.price}$</span>
+                    <span className="product-price-new">
+                      {calDiscountPrice(item.price, item.discount)}$
+                    </span>
+                  </div>
                 ) : (
-                  item.quantity
+                  <div>
+                    <span className="product-price">{item.price}$</span>
+                  </div>
                 )}
               </td>
-              <button
-                id={`plus-btn-${item.id}`}
-                className="quantity-btn plus-btn"
-                onClick={() => handleQuantity(item.id, item.quantity + 1)}
-              >
-                +
-              </button>
-            </td>
-            <td>
-              <img
-                className="cart-table-img"
-                src={item.image}
-                alt={item.name}
-              />
-            </td>
-            <td>
-              {item.discount ? (
-                <div className="cart-table-price-group">
-                  <span className="product-price-old">{item.price}$</span>
-                  <span className="product-price-new">
-                    {calDiscountPrice(item.price, item.discount)}$
-                  </span>
-                </div>
-              ) : (
-                <div>
-                  <span className="product-price">{item.price}$</span>
-                </div>
-              )}
-            </td>
-            <td>{calSubTotal(item.price, item.quantity, item.discount)}$</td>
-            <td>
-              <button onClick={() => handleDeleteCart(item.id)}>Delete</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+              <td className="cart-table-subtotal">
+                {calSubTotal(item.price, item.quantity, item.discount)}$
+              </td>
+              <td>
+                <button onClick={() => handleDeleteCart(item.id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="cart-table-total col col-3">
+        <span className="cart-table-total-text">Total:</span>
+        <span className="cart-table-total-price">{total.toFixed(2)}$</span>
+      </div>
+    </div>
   );
 };
 
