@@ -11,6 +11,12 @@ ol {
   list-style: none;
 }
 
+image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Remove default link styles */
 a {
   text-decoration: none;
@@ -267,11 +273,6 @@ footer {
   display: flex;
   flex-direction: column;
 }
-.product-link:hover {
-  transform: scale(1.05);
-  transition: 0.2s ease-out;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 .product-discount {
   top: 5%;
   left: 10%;
@@ -282,6 +283,19 @@ footer {
 }
 .product-image-wrapper:hover > button {
   display: block;
+}
+.product-image-wrapper {
+  z-index: 9;
+  transition: all 0.3s ease-in-out;
+}
+.product-img {
+  z-index: 9;
+  transition: all 0.3s ease-in-out;
+}
+
+.product-image-wrapper:hover > img {
+  scale: 1.025;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .btn-add-to-cart {

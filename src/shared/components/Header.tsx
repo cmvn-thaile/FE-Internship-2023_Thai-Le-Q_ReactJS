@@ -11,8 +11,9 @@ import {
   StorageKey,
   saveToLocalStorage,
 } from '../services/localStorageServices';
-import { getProduct } from '../../redux/action';
+
 import { useAppDispatch } from '../../redux/store';
+import { getProduct } from '../../redux/action/product';
 
 const Header = () => {
   const location = useLocation();

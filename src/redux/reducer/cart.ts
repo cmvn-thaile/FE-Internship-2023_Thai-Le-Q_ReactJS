@@ -1,14 +1,14 @@
-import { Cart } from '../types';
+import { Cart } from '../../types';
 import {
   ADD_NEW_CART,
   ADD_CONTAIN_CART,
   REMOVE_CART,
   UPDATE_CART,
-} from './type';
+} from '../type';
 import {
   StorageKey,
   getFromLocalStorage,
-} from '../shared/services/localStorageServices';
+} from '../../shared/services/localStorageServices';
 
 interface Action {
   type: string;

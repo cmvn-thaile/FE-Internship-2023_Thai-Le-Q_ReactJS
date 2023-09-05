@@ -7,5 +7,6 @@ export const UPDATE_CART = 'UPDATE_CART';
 
 // fetch product type
 
-export const GET_PRODUCT = 'GET_PRODUCT';
+export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT';
 export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
+export const PENDING_GET_PRODUCT = 'PENDING_GET_PRODUCT';

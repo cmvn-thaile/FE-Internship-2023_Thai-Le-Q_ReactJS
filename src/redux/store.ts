@@ -1,20 +1,17 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { cartReducer } from './cart-reducer';
+import { createStore, applyMiddleware } from 'redux';
+
 import thunkMiddleware from 'redux-thunk';
-import { productReducer } from './product-reducer';
 import { loggerMiddleware } from './middleware';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { rootReducer } from './reducer';
 
-const rootReducer = combineReducers({
-  cart: cartReducer,
-  product: productReducer,
-});
-
-export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware,loggerMiddleware));
+export const store = createStore(
+  rootReducer,
+  applyMiddleware(thunkMiddleware, loggerMiddleware)
+);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-
-export const useAppDispatch: () => AppDispatch = useDispatch
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

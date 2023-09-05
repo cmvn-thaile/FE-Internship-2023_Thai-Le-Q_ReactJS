@@ -1,5 +1,5 @@
-@import "./../base/variables";
-@import "./../state/color";
+@import './../base/variables';
+@import './../state/color';
 
 .product {
   &-item {
@@ -28,12 +28,6 @@
   &-link {
     display: flex;
     flex-direction: column;
-
-    &:hover {
-      transform: scale(1.05);
-      transition: 0.2s ease-out ;
-      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    }
   }
 
   &-discount {
@@ -46,9 +40,22 @@
     text-align: center;
   }
 
-  &-image-wrapper:hover > button{
+  &-image-wrapper:hover > button {
     display: block;
   }
+
+  &-image-wrapper {
+    z-index: 9;
+    transition: all 0.3s ease-in-out;
+  }
+  &-img {
+    z-index: 9;
+    transition: all 0.3s ease-in-out;
+  }
+}
+.product-image-wrapper:hover > img {
+  scale: 1.025;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .btn-add-to-cart {
@@ -59,7 +66,7 @@
   background-color: map-get($color, primary);
   border-radius: 32px;
   border: 1px solid map-get($color, primary);
-  color: map-get($color, black );
+  color: map-get($color, black);
   font-weight: 700;
   padding: 10px 25px;
   display: none;
@@ -68,15 +75,16 @@
     border: 1px solid map-get($color, primary);
     background-color: map-get($color, white);
     color: map-get($color, primary);
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
 
-.cart-btn-disabled{
+.cart-btn-disabled {
   background-color: map-get($color, red);
   border-radius: 32px;
   border: 1px solid map-get($color, red);
-  color: map-get($color, white );
+  color: map-get($color, white);
   font-weight: 700;
   padding: 10px 25px;
   display: none;
@@ -87,6 +95,21 @@
     color: map-get($color, red);
   }
 }
+
+// .product-skeleton{
+//   display: flex;
+//   justify-content: space-between;
+//   gap:10px;
+//   flex-wrap: wrap;
+//   margin: 0 auto;
+
+//   &-item {
+//     width: 23.33333%;
+//     background-color: #eaeaea;
+//   }
+
+// }
+
 @media only screen and (max-width: 768px) {
   .product {
     &-img {

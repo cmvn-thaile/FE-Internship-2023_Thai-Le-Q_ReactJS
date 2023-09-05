@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCartQuantity } from '../../../../redux/action';
+
 import { useRef, useState, useEffect } from 'react';
 
 import { Cart } from '../../../../types';
 import { calDiscountPrice, calSubTotal } from '../../../../utils/caculation';
+import { updateCartQuantity } from '../../../../redux/action/cart';
 
 const CartTable = () => {
   const cartData = useSelector(
@@ -13,16 +14,31 @@ const CartTable = () => {
   const dispatch = useDispatch();
 
   const handleQuantity = (id: number, quantity: number) => {
-    const action = updateCartQuantity(id, quantity);
-    if (action) {
-      dispatch(action);
+    if (quantity < 1) {
+      const confirmed = window.confirm('Do you want to remove this product?');
+
+      if (confirmed) {
+        const action = updateCartQuantity(id, quantity);
+        if (action) {
+          dispatch(action);
+        }
+      }
+    } else {
+      const action = updateCartQuantity(id, quantity);
+      if (action) {
+        dispatch(action);
+      }
     }
   };
 
   const handleDeleteCart = (id: number) => {
-    const action = updateCartQuantity(id, 0);
-    if (action) {
-      dispatch(action);
+    const confirmed = window.confirm('Do you want to remove this product?');
+
+    if (confirmed) {
+      const action = updateCartQuantity(id, 0);
+      if (action) {
+        dispatch(action);
+      }
     }
   };
 

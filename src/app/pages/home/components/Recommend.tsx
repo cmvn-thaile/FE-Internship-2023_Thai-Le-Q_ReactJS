@@ -20,9 +20,6 @@ const Recommend = () => {
 
         <ProductList
           data={products}
-          // cartData={cartData}
-          // setCartData={setCartData}
-          // addToCart={addToCart}
         />
       </div>
     </section>

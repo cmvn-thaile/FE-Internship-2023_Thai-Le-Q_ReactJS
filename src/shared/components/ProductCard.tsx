@@ -1,14 +1,15 @@
 import { calDiscountPrice } from '../../utils/caculation';
 import { Product, Cart } from '../../types';
-import { addToCart } from '../../redux/action';
-import { useDispatch } from 'react-redux';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../redux/action/cart';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  
   const dispatch = useDispatch();
 
   const handleAddToCart = async (product: Product) => {
@@ -28,8 +29,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
     }
   };
 
+  const isLoading = useSelector(
+    (state: { product: { isLoading: boolean } }) => state.product.isLoading
+  );
+
   return (
     <li className="product-item col col-3 col-sm-6">
+
       <a className="product-link">
         {product.discount ? (
           <span className="badge badge-danger product-discount absolute">
@@ -39,7 +45,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           ''
         )}
         <div
-          id={`product-${product.id}`}
+
           className="relative product-image-wrapper"
         >
           <img className="product-img" src={product.image} alt={product.name} />

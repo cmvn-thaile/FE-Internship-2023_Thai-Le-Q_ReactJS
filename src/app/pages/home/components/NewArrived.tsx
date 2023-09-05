@@ -17,7 +17,6 @@ const NewArrived = () => {
         </h3>
         <ProductList
           data={products}
-
         />
       </div>
     </section>
