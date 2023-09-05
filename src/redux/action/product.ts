@@ -1,6 +1,10 @@
 import { ThunkAction } from 'redux-thunk';
 import { Product } from '../../types';
-import { GET_PRODUCT_ERROR, GET_PRODUCT_SUCCESS, PENDING_GET_PRODUCT } from '../type';
+import {
+  GET_PRODUCT_ERROR,
+  GET_PRODUCT_SUCCESS,
+  PENDING_GET_PRODUCT,
+} from '../type';
 import { RootState } from '../store';
 import { endpoint } from '../../app/api/apiUrls';
 
@@ -29,6 +33,10 @@ export const getProduct =
   (): ThunkAction<Promise<void>, RootState, null, any> =>
   async (dispatch: any) => {
     await dispatch(pendingGetProduct());
+    const shouldThrowError = Math.floor(Math.random() * 2);
+    if (shouldThrowError) {
+      return dispatch(getProductError("Can't load product! Something went wrong"));
+    }
     setTimeout(async () => {
       try {
         const response = await fetch(endpoint.productData, {

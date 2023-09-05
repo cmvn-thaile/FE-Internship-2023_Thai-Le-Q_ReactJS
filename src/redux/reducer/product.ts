@@ -31,6 +31,7 @@ export const productReducer = (state = initialState, action: any) => {
     case GET_PRODUCT_ERROR:
       return {
         ...state,
+        isLoading: action.payload.isLoading,
         error: action.payload.error,
       };
 

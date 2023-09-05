@@ -755,6 +755,10 @@ footer {
   padding-top: 12px;
 }
 
+.gap-10 {
+  gap: 10px;
+}
+
 @media only screen and (max-width: 768px) {
   .sm-p-40 {
     padding: 40px 0;

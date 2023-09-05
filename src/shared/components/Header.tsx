@@ -44,6 +44,8 @@ const Header = () => {
   React.useEffect(() => {
     if (pathname === '/cart') {
       setIsCardHeader(true);
+    } else if(pathname === '/error'){
+      setIsCardHeader(true);
     } else {
       setIsCardHeader(false);
     }

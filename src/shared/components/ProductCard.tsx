@@ -1,6 +1,5 @@
 import { calDiscountPrice } from '../../utils/caculation';
 import { Product, Cart } from '../../types';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/action/cart';
