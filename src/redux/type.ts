@@ -10,3 +10,9 @@ export const UPDATE_CART = 'UPDATE_CART';
 export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
 export const PENDING_GET_PRODUCT = 'PENDING_GET_PRODUCT';
+
+// user
+export const LOGIN_PENDING = 'LOGIN_PENDING';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGIN_FALSE = 'LOGIN_FALSE';
