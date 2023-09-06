@@ -88,7 +88,7 @@ const Header = () => {
       dispatch(action);
     }
     toast.info('Login in....');
-    if(userMessage==="Login success"){
+    if (userMessage === 'Login success') {
       setIsShowModal(false);
     }
   };
@@ -109,10 +109,9 @@ const Header = () => {
     if (userError) {
       toast.error(userError);
     }
-    if (userMessage==="Login success") {
+    if (userMessage === 'Login success') {
       toast.success(userMessage);
     }
-    
   }, [userError, userMessage]);
   return (
     <>
