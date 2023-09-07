@@ -8,7 +8,6 @@ import { calTotalQuantity } from '../../utils/caculation';
 import { Cart } from '../../types';
 
 import { useModalContext } from '../context/modalContext';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
@@ -103,7 +102,7 @@ const Header = () => {
     if (action) {
       dispatch(action);
     }
-    toast.info('Login in....');
+
   };
 
   const handleLogout = () => {
@@ -111,11 +110,11 @@ const Header = () => {
     if (action) {
       dispatch(action);
     }
-    const clearCartAction = clearCart(); 
+    const clearCartAction = clearCart();
     if (clearCartAction) {
       dispatch(clearCartAction);
     }
-    toast.success('Logout success');
+
   };
 
   const handleSubmitSignUp = (event: React.FormEvent<HTMLFormElement>) => {
@@ -130,29 +129,10 @@ const Header = () => {
 
   const { isShowModal, setIsShowModal } = useModalContext();
 
-  useEffect(() => {
-    if (userError) {
-      toast.error(userError);
-    }
-    if (userMessage === 'Login success') {
-      toast.success(userMessage);
-    }
-  }, [userError, userMessage]);
+
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <ToastContainer />
+
       {isShowModal &&
         (isSignUp ? (
           <Modal>
@@ -292,6 +272,11 @@ const Header = () => {
                   <Link
                     className="link-cart"
                     to={userData?.length === 0 ? `/` : '/cart'}
+                    onClick={
+                      userData?.length === 0
+                        ? () => setIsShowModal(true)
+                        : undefined
+                    }
                   >
                     {count > 0 ? (
                       <span className="cart-quantity">{count}</span>
