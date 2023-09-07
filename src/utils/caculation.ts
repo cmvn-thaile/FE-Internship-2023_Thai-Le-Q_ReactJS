@@ -1,4 +1,4 @@
-import { Cart } from '../shared/services/types';
+import { Cart } from '../types';
 
 export const calDiscountPrice = (price: number, discount: number): number => {
   return price - parseFloat(((price * discount) / 100).toFixed(2));

@@ -9,15 +9,15 @@
     border-top: 2px solid map-get($color, white);
   }
 
-  .copyright {
-    text-align: center;
-    padding: 20px 0;
-    font-size: map-get($font-size, sm-2);
-    font-weight: map-get($font-weight, normal);
-    color: map-get($color, white);
-  }
 }
 
+.copyright {
+  text-align: center;
+  padding: 20px 0;
+  font-size: map-get($font-size, sm-2);
+  font-weight: map-get($font-weight, normal);
+  color: map-get($color, white);
+}
 .shop-details {
   &-list {
     justify-content: space-between;

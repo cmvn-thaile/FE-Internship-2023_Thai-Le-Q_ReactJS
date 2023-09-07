@@ -19,4 +19,12 @@ export interface Cart {
   price: number;
   discount: number | null;
   quantity: number;
+
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
 }

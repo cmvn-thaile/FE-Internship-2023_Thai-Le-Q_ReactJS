@@ -1,29 +1,14 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { redirect, useLocation } from 'react-router-dom';
 import CartTable from './components/CartTable';
 import CartEmpty from './components/CartEmpty';
-import { useCart } from '../../../shared/hook/useCart';
-import {
-  StorageKey,
-  getFromLocalStorage,
-} from '../../../shared/services/localStorageServices';
-import { Cart } from '../../../shared/services/types';
-import { createId } from '../../../shared/services/createId';
-import { useOutletContext } from 'react-router-dom';
-
-interface Props {
-  cartData: Cart[];
-  handleQuantity: (id: number, type: string) => void;
-  handleDeleteCart: (id: number) => void;
-}
+import { Cart } from '../../../types';
 
 export const Index = () => {
-  const {
-    cartData,
-
-    handleQuantity,
-    handleDeleteCart,
-  }: Props = useOutletContext();
-
+  const cartData = useSelector(
+    (state: { cart: { carts: Cart[] } }) => state.cart.carts
+  );
 
 
   return (
@@ -31,12 +16,7 @@ export const Index = () => {
       {cartData && cartData.length !== 0 ? (
         <>
           <h2> Shopping Cart</h2>
-          <CartTable
-            cartData={cartData}
-            handleDeleteCart={handleDeleteCart}
-            handleQuantity={handleQuantity}
-          
-          />
+          <CartTable />
         </>
       ) : (
         <CartEmpty />
