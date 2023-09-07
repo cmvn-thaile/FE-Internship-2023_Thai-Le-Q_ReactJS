@@ -50,7 +50,7 @@ export const login =
   }: LoginCredentials): ThunkAction<Promise<void>, RootState, null, any> =>
   async (dispatch: any) => {
     await dispatch(loginPending());
-    toast.info('Please wait...')
+    toast.info('Please wait...');
 
     setTimeout(async () => {
       try {
@@ -75,21 +75,21 @@ export const login =
 
         if (user) {
           await dispatch(loginSuccess(user));
-          toast.success('Login success')
+          toast.success('Login success');
         } else {
           await dispatch(loginFalse('Wrong email or password'));
-          toast.error('Wrong email or password')
+          toast.error('Wrong email or password');
         }
       } catch (error: any) {
         dispatch(loginError(error));
-        toast.error('Something went wrong')
+        toast.error('Something went wrong');
       }
     }, 1000);
   };
 
-
-  export const logout = () => {
-    return {
-      type: LOGOUT,
-    };
-  }
+export const logout = () => {
+  toast.success('Logout success');
+  return {
+    type: LOGOUT,
+  };
+};
