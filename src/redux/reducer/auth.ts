@@ -1,10 +1,16 @@
+import { get } from 'http';
 import { User } from '../../types';
 import {
   LOGIN_PENDING,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FALSE,
+  LOGOUT,
 } from '../type';
+import {
+  StorageKey,
+  getFromLocalStorage,
+} from '../../shared/services/localStorageServices';
 
 interface Action {
   type: string;
@@ -12,14 +18,14 @@ interface Action {
 }
 
 interface State {
-  users: User[];
+  users: any ;
   error: any;
   isLoading?: boolean;
   message?: string;
 }
 
 const initialState: State = {
-  users: [],
+  users: getFromLocalStorage(StorageKey.UserData) ,
   error: null,
   isLoading: false,
   message: '',
@@ -59,6 +65,14 @@ export const authReducer = (state: State = initialState, action: Action) => {
         isLoading: false,
         message: 'Login error',
       };
+      case LOGOUT:
+        return {
+          ...state,
+          users: [],
+          isLoading: false,
+          error: null,
+          message: 'Logout success',
+        };
     default:
       return state;
   }

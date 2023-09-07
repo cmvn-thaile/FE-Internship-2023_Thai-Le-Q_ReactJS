@@ -32,9 +32,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
     (state: { product: { isLoading: boolean } }) => state.product.isLoading
   );
 
+  const userData = useSelector(
+    (state: { auth: { users: any } }) => state.auth.users
+  );
+
   return (
     <li className="product-item col col-3 col-sm-6">
-
       <a className="product-link">
         {product.discount ? (
           <span className="badge badge-danger product-discount absolute">
@@ -43,10 +46,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         ) : (
           ''
         )}
-        <div
-
-          className="relative product-image-wrapper"
-        >
+        <div className="relative product-image-wrapper">
           <img className="product-img" src={product.image} alt={product.name} />
           {product.status === 'outOfStock' ? (
             <button
@@ -63,6 +63,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <button
               className={`btn ${product.id} btn-add-to-cart absolute`}
               onClick={() => handleAddToCart(product)}
+              disabled={userData.length === 0}
             >
               Add to cart
             </button>

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { redirect, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -7,7 +7,7 @@ import logo from '../../assets/img/logo.png';
 import { calTotalQuantity } from '../../utils/caculation';
 import { Cart } from '../../types';
 
-import { ModalContext, useModalContext } from '../context/modalContext';
+import { useModalContext } from '../context/modalContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,7 +19,7 @@ import {
 import { useAppDispatch } from '../../redux/store';
 import { getProduct } from '../../redux/action/product';
 import Modal from './Modal';
-import { login } from '../../redux/action/auth';
+import { login, logout } from '../../redux/action/auth';
 
 const Header = () => {
   const location = useLocation();
@@ -37,6 +37,10 @@ const Header = () => {
     (state: { auth: { message: any } }) => state.auth.message
   );
 
+  const userData = useSelector(
+    (state: { auth: { users: any } }) => state.auth.users
+  );
+
   const [count, setCount] = React.useState(0);
 
   const dispatch = useAppDispatch();
@@ -47,6 +51,11 @@ const Header = () => {
       dispatch(action);
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!userData && userData === null) return;
+    saveToLocalStorage(StorageKey.UserData, userData);
+  }, [userData]);
 
   useEffect(() => {
     if (!cartData && cartData === null) return;
@@ -66,6 +75,12 @@ const Header = () => {
     }
   }, [pathname]);
 
+  React.useEffect(() => {
+    if (userData?.name) {
+      setIsShowModal(false);
+    }
+  }, [userData]);
+
   const [formData, setFormData] = React.useState<any>([]);
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
 
@@ -74,7 +89,7 @@ const Header = () => {
 
     setFormData((prevFormData: FormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value.trim(),
     }));
   };
 
@@ -88,14 +103,19 @@ const Header = () => {
       dispatch(action);
     }
     toast.info('Login in....');
-    if (userMessage === 'Login success') {
-      setIsShowModal(false);
+  };
+
+  const handleLogout = () => {
+    const action = logout();
+    if (action) {
+      dispatch(action);
     }
+    toast.success('Logout success')
   };
 
   const handleSubmitSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('sign up', formData);
+
     if (formData.password !== formData.rePassword) {
       alert('Password is not correct');
     }
@@ -117,7 +137,7 @@ const Header = () => {
     <>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -264,7 +284,10 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="header-icons-item">
-                  <Link className="link-cart" to={`/cart`}>
+                  <Link
+                    className="link-cart"
+                    to={userData?.length === 0 ? `/` : '/cart'}
+                  >
                     {count > 0 ? (
                       <span className="cart-quantity">{count}</span>
                     ) : null}
@@ -272,10 +295,25 @@ const Header = () => {
                   </Link>
                 </li>
                 <li
-                  onClick={() => setIsShowModal(true)}
+                  onClick={
+                    userData?.length === 0
+                      ? () => setIsShowModal(true)
+                      : undefined
+                  }
                   className="header-icons-item"
                 >
-                  <i className="icon icon-user"></i>
+                  {userData?.length === 0 ? (
+                    <i className="icon icon-user"></i>
+                  ) : (
+                    <div className="user-login">
+                      <span className="user-name">{userData?.name}</span>
+                      <Link to={'/'}>
+                        <span onClick={handleLogout} className="user-logout">
+                          Log out
+                        </span>
+                      </Link>
+                    </div>
+                  )}
                 </li>
               </ul>
               <ul className="header-icons-list-sm">

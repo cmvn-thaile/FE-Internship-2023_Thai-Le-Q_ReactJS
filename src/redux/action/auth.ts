@@ -5,11 +5,11 @@ import {
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FALSE,
+  LOGOUT,
 } from '../type';
 import { RootState } from '../store';
-import { User } from '../../types';
 
-export const loginSuccess = (users: User[]) => {
+export const loginSuccess = (users: any) => {
   return {
     type: LOGIN_SUCCESS,
     payload: { users, isLoading: false },
@@ -60,9 +60,17 @@ export const login =
         });
         const userData = await response.json();
 
-        const user = userData.find(
+        const userExist = userData.find(
           (user: any) => user.email === email && user.password === password
         );
+
+        const user = {
+          id: userExist.id,
+          name: userExist.name,
+          email: userExist.email,
+          password: userExist.password,
+        };
+
         if (user) {
           await dispatch(loginSuccess(user));
         } else {
@@ -73,3 +81,10 @@ export const login =
       }
     }, 1000);
   };
+
+
+  export const logout = () => {
+    return {
+      type: LOGOUT,
+    };
+  }

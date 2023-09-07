@@ -42,6 +42,41 @@
   color: white;
 }
 
+.user-name{
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+
+  
+}
+.user-logout{
+  position: absolute;
+  top: 25px;
+  right: -15px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  background-color: map-get($color, primary);
+  padding: 10px 20px;
+  cursor: pointer;
+  display: none;
+
+}
+
+.user-login{
+  position: relative;
+  transition: all 0.8s ease-in-out;
+  &:hover{
+    .user-logout{
+      display: block;
+    }
+  }
+}
+
+
+
 @media only screen and (max-width: 576px) {
   .logo {
     max-width: 20px;

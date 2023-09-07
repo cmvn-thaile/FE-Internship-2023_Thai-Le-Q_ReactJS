@@ -317,6 +317,15 @@ footer {
   color: #fbb03b;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.btn-add-to-cart:disabled {
+  background-color: #c4c4c4;
+  border-radius: 32px;
+  border: 1px solid #c4c4c4;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 25px;
+  display: none;
+}
 
 .cart-btn-disabled {
   background-color: #ff0000;
@@ -577,6 +586,35 @@ footer {
 
 .header-container-cart > nav > ul > li {
   color: white;
+}
+
+.user-name {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.user-logout {
+  position: absolute;
+  top: 25px;
+  right: -15px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  background-color: #fbb03b;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.user-login {
+  position: relative;
+  transition: all 0.8s ease-in-out;
+}
+.user-login:hover .user-logout {
+  display: block;
 }
 
 @media only screen and (max-width: 576px) {
