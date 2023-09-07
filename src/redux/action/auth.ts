@@ -41,12 +41,14 @@ export const loginFalse = (error: any) => {
 interface LoginCredentials {
   email: string;
   password: string;
+  isClickCart: boolean;
 }
 
 export const login =
   ({
     email,
     password,
+    isClickCart
   }: LoginCredentials): ThunkAction<Promise<void>, RootState, null, any> =>
   async (dispatch: any) => {
     await dispatch(loginPending());
@@ -76,6 +78,9 @@ export const login =
         if (user) {
           await dispatch(loginSuccess(user));
           toast.success('Login success');
+          if (isClickCart) {
+            window.location.href = '/cart';
+          }
         } else {
           await dispatch(loginFalse('Wrong email or password'));
           toast.error('Wrong email or password');

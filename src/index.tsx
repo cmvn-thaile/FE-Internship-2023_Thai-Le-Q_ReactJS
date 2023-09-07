@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client';
 import './stylesheet/css/style.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 
@@ -15,7 +15,7 @@ root.render(
       <App />
       <ToastContainer
         position="top-right"
-        autoClose={2000}
+        autoClose={500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { redirect, useLocation } from 'react-router-dom';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -20,6 +20,9 @@ import { getProduct } from '../../redux/action/product';
 import Modal from './Modal';
 import { login, logout } from '../../redux/action/auth';
 import { clearCart } from '../../redux/action/cart';
+import { useForm } from '../hook/useForm';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
 
 const Header = () => {
   const location = useLocation();
@@ -42,6 +45,7 @@ const Header = () => {
   );
 
   const [count, setCount] = React.useState(0);
+  const [isSubmit, setIsSubmit] = React.useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -81,29 +85,8 @@ const Header = () => {
     }
   }, [userData]);
 
-  const [formData, setFormData] = React.useState<any>([]);
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-
-    setFormData((prevFormData: FormData) => ({
-      ...prevFormData,
-      [name]: value.trim(),
-    }));
-  };
-
-  const handleSubmitLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // console.log('sign in', formData);
-    const { email, password } = formData;
-    const action = login({ email, password });
-    // console.log(action);
-    if (action) {
-      dispatch(action);
-    }
-
-  };
+  const [isClickCart, setIsClickCart] = React.useState<boolean>(false);
 
   const handleLogout = () => {
     const action = logout();
@@ -114,111 +97,59 @@ const Header = () => {
     if (clearCartAction) {
       dispatch(clearCartAction);
     }
-
   };
-
-  const handleSubmitSignUp = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (formData.password !== formData.rePassword) {
-      alert('Password is not correct');
-    }
-
-    // Perform any necessary actions here, such as submitting the form data to a server endpoint
-  };
-
   const { isShowModal, setIsShowModal } = useModalContext();
 
+  const {
+    formData,
+    handleChange,
+    isEmailValid,
+    isPasswordValid,
+    isFormValid,
+    handleBlur,
+  } = useForm({
+    initState: { email: '', password: '' },
+  });
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (isFormValid) {
+      const { email, password } = formData;
+      const action = login({ email, password , isClickCart});
+      if (action) {
+        dispatch(action);
+      }
+      setIsSubmit(false);
+    } else {
+      setIsSubmit(true);
+    }
+
+    if (userData.length !== 0 && isClickCart) {
+      redirect('/cart');
+    }
+  };
+
+  console.log('s', isClickCart);
 
   return (
     <>
-
       {isShowModal &&
         (isSignUp ? (
           <Modal>
-            <form onSubmit={handleSubmitSignUp}>
-              <h2 className="modal-title">Sign up to use our features</h2>
-              <input
-                className="modal-input"
-                type="email"
-                required
-                onChange={handleChange}
-                name="email"
-                id="sign-up-email"
-                placeholder="Fill your email"
-              />
-
-              <input
-                className="modal-input"
-                type="text"
-                required
-                name="name"
-                onChange={handleChange}
-                id="sign-up-name"
-                placeholder="Fill your name"
-              />
-
-              <input
-                className="modal-input"
-                type="password"
-                required
-                name="password"
-                onChange={handleChange}
-                id="sign-up-password"
-                placeholder="Fill your password"
-              />
-              <input
-                className="modal-input"
-                type="password"
-                required
-                name="rePassword"
-                onChange={handleChange}
-                id="sign-up-rePassword"
-                placeholder="Re-fill your password"
-              />
-              <button className="btn btn-primary" type="submit">
-                Sign up
-              </button>
-            </form>
-            <p>
-              If you have an account.
-              <span onClick={() => setIsSignUp(false)}>
-                Click here to sign in
-              </span>
-            </p>
+            <SignUp handleChange={handleChange} setIsSignUp={setIsSignUp} />
           </Modal>
         ) : (
           <Modal>
-            <form onSubmit={handleSubmitLogin}>
-              <h2 className="modal-title">Login to use our features</h2>
-              <input
-                className="modal-input"
-                type="email"
-                required
-                onChange={handleChange}
-                name="email"
-                id="sign-in-email"
-                placeholder="Fill your email"
-              />
-              <input
-                className="modal-input"
-                type="password"
-                required
-                name="password"
-                onChange={handleChange}
-                id="sign-in-password"
-                placeholder="Fill your password"
-              />
-              <button className="btn btn-primary" type="submit">
-                Login
-              </button>
-            </form>
-            <p>
-              If you dont have an account.{' '}
-              <span onClick={() => setIsSignUp(true)}>
-                Click here to sign up
-              </span>
-            </p>
+            <SignIn
+              formData={formData}
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+              isEmailValid={isEmailValid}
+              isPasswordValid={isPasswordValid}
+              handleBlur={handleBlur}
+              isSubmit={isSubmit}
+            />
           </Modal>
         ))}
       <header>
@@ -272,11 +203,12 @@ const Header = () => {
                   <Link
                     className="link-cart"
                     to={userData?.length === 0 ? `/` : '/cart'}
-                    onClick={
-                      userData?.length === 0
-                        ? () => setIsShowModal(true)
-                        : undefined
-                    }
+                    onClick={() => {
+                      if (userData?.length === 0) {
+                        setIsShowModal(true);
+                      }
+                      setIsClickCart(true);
+                    }}
                   >
                     {count > 0 ? (
                       <span className="cart-quantity">{count}</span>
