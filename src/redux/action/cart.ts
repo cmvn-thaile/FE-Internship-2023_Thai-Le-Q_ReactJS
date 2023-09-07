@@ -1,5 +1,5 @@
 import { StorageKey, getFromLocalStorage } from '../../shared/services/localStorageServices';
-import { ADD_CONTAIN_CART, ADD_NEW_CART, REMOVE_CART, UPDATE_CART } from '../type';
+import { ADD_CONTAIN_CART, ADD_NEW_CART, CLEAR_CART, REMOVE_CART, UPDATE_CART } from '../type';
 
 interface Props {
   id: number;
@@ -64,3 +64,10 @@ export const deleteCartItem = (id: number) => {
     payload: { id },
   };
 };
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+    payload: [],
+  };
+}

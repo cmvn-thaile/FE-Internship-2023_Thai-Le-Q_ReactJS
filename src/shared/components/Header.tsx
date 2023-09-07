@@ -20,6 +20,7 @@ import { useAppDispatch } from '../../redux/store';
 import { getProduct } from '../../redux/action/product';
 import Modal from './Modal';
 import { login, logout } from '../../redux/action/auth';
+import { clearCart } from '../../redux/action/cart';
 
 const Header = () => {
   const location = useLocation();
@@ -110,7 +111,11 @@ const Header = () => {
     if (action) {
       dispatch(action);
     }
-    toast.success('Logout success')
+    const clearCartAction = clearCart(); 
+    if (clearCartAction) {
+      dispatch(clearCartAction);
+    }
+    toast.success('Logout success');
   };
 
   const handleSubmitSignUp = (event: React.FormEvent<HTMLFormElement>) => {

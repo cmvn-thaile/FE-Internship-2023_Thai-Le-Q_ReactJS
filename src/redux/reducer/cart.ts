@@ -4,6 +4,7 @@ import {
   ADD_CONTAIN_CART,
   REMOVE_CART,
   UPDATE_CART,
+  CLEAR_CART,
 } from '../type';
 import {
   StorageKey,
@@ -61,6 +62,11 @@ export const cartReducer = (state: State = initialState, action: Action) => {
         carts: state.carts.filter(
           (item: Cart) => item.id !== action.payload.id
         ),
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        carts:action.payload,
       };
 
     default:
